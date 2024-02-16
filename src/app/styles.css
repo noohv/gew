@@ -1,40 +1,30 @@
-.center {
-    display: flex;
-    justify-content: center;
+.circle-box {
+  display: flex;
+  justify-content: center;
+  max-height: 100vh;
 }
 
-.circlegraph {
-    position: relative;
-    width: 500px;
-    height: 500px;
-    margin: calc(100px / 2 + 0px);
-  }
-  
-  .circlegraph::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: calc(100% - 2px * 2);
-    height: calc(100% - 2px * 2);
-    border-radius: 50%;
-  }
-  
-  .circlegraph .circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 50px;
-    height: 50px;
-    margin: calc(-100px / 2);
-    background: teal;
-    border-radius: 50%;
-    overflow-wrap: break-word;
-  }
+.circle-container {
+  flex: 1;
+}
+.circle {
+  color: #2F7285;
+}
 
-  .circle span {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
-  }
-  
+g text {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+g {
+  pointer-events: bounding-box;
+}
+
+g:hover .circle {
+  color: blue;
+}
+
+.selected {
+  color: blue;
+}
