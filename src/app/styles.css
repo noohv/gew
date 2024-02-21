@@ -31,15 +31,24 @@ g:hover .circle {
   gap: 5px;
 }
 
-.rate-option-container {
+.rate input {
+  display: none
+}
+
+.rate-btn {
+  cursor: pointer;
   height: 50px;
   width: 50px;
   border-style: solid;
   border-color: #2F7285;
 }
 
-.rate input {
-  display: none
+.rate-btn p {
+  text-align: center;
+}
+
+.checked {
+  background-color: #2F7285;
 }
 
 @media only screen and (max-width: 768px) {
