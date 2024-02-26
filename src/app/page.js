@@ -6,32 +6,50 @@ import emotions from "../emotions.js"
 
 export default function Home() {
 
-  const [selectedItem, setSelectedItem] = useState([])
+  const [selectedItems, setSelectedItems] = useState([])
   const [currentItem, setCurrentItem] = useState()
-  const [showRating, setShowRating] = useState(false)
   const [rating, setRating] = useState()
+  const [showRating, setShowRating] = useState(false)
 
   const handleChange = (e) => {
     setRating(e.currentTarget.value)
   }
 
+  const handleSave = (e) => {
+    if(currentItem && rating) {
+      if(selectedItems.find(a => a.name === currentItem.name)) {
+        // Logic to update rating
+      }
+      else {
+        setSelectedItems(prev => [...prev, {...currentItem, rating: rating}])
+        setCurrentItem()
+        setRating()
+        setShowRating(false)
+      }
+    }
+  }
+
   function handleItemClick(emotion) {
-    
+    setCurrentItem(emotion)
 
     if(emotion === "none" || emotion === "other") {
-      setSelectedItem([emotion])
+      setShowRating(false)
+      setSelectedItems([emotion])
     }
-    else if (selectedItem[0] === "none" || selectedItem[0] === "other") {
-      setSelectedItem([emotion])
-    } else {
-      setCurrentItem(emotion)
-      setShowRating(true)
-      // setSelectedItem(prev => [...prev, emotion])
-
-    }
-
+    else {
+      if(selectedItems[0] === "none" || selectedItems[0] === "other") {
+        setSelectedItems([])
+      }
+        setShowRating(true)
+        const obj = selectedItems.find(a => a.name === emotion.name)
+        if(obj) {
+          setRating(obj.rating)
+        }
+        else {
+          setRating()
+        }
+    } 
   }
-  console.log(selectedItem)
 
   const wheelItems = emotions.map((emotion, index) => {
     // Angles for emotion circles
@@ -46,7 +64,7 @@ export default function Home() {
     return (
       <g key={emotion.id} onClick={() => handleItemClick(emotion)}>
         <circle
-          className={`circle ${selectedItem.find(a => a.name === emotion.name) || currentItem?.name === emotion.name ? 'selected' : ''}`}
+          className={`circle ${selectedItems.find(a => a.name === emotion.name) || currentItem?.name === emotion.name ? 'selected' : ''}`}
           cx={`${cx}%`}
           cy={`${cy}%`}
           r="50" // Radius of emotion circles
@@ -73,7 +91,7 @@ export default function Home() {
       <svg className="circle-container" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1000 1000">
         <g onClick={() => handleItemClick("none")}>
           <circle
-            className={`circle ${selectedItem.find(a => a  === "none") ? 'selected' : ''}`}
+            className={`circle ${selectedItems.find(a => a  === "none") ? 'selected' : ''}`}
             cx="40%"
             cy="50%"
             r="50" // Radius of emotion circles
@@ -93,7 +111,7 @@ export default function Home() {
         </g>
         <g onClick={() => handleItemClick("other")}>
           <circle
-            className={`circle ${selectedItem.find(a => a  === "other") ? 'selected' : ''}`}
+            className={`circle ${selectedItems.find(a => a  === "other") ? 'selected' : ''}`}
             cx="60%"
             cy="50%"
             r="50" // Radius of emotion circles
@@ -120,6 +138,7 @@ export default function Home() {
         rating={rating} 
         setRating={setRating} 
         handleChange={handleChange}
+        handleSave={handleSave}
       />
     }
   </>
