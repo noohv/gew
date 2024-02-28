@@ -3,7 +3,7 @@ import Rate from './Rate'
 import emotions from '../../emotions.js'
 import '../styles.css'
 
-export default function Circle({ selectedItems, setSelectedItems }) {
+export default function Wheel({ selectedItems, setSelectedItems }) {
   const [currentItem, setCurrentItem] = useState()
   const [rating, setRating] = useState()
   const [showRating, setShowRating] = useState(false)
@@ -68,6 +68,7 @@ export default function Circle({ selectedItems, setSelectedItems }) {
     if (emotion === "none" || emotion === "other") {
       setShowRating(false)
       setSelectedItems([emotion])
+    } else if (emotion === 'other') {
     }
     else {
       if (selectedItems[0] === "none" || selectedItems[0] === "other") {
@@ -95,9 +96,9 @@ export default function Circle({ selectedItems, setSelectedItems }) {
 
 
     return (
-      <g key={emotion.id} onClick={() => handleItemClick(emotion)}>
+      <g id={emotion.id} key={emotion.id} onClick={() => handleItemClick(emotion)}>
         <circle
-          className={`circle ${selectedItems.find(a => a.name === emotion.name) || currentItem?.name === emotion.name ? 'selected' : ''}`}
+          className={`circle ${selectedItems.find(a => a.name === emotion.name) ? 'selected' : currentItem?.name === emotion.name ? 'current' : ''}`}
           cx={`${cx}%`}
           cy={`${cy}%`}
           r="50" // Radius of emotion circles
@@ -119,54 +120,57 @@ export default function Circle({ selectedItems, setSelectedItems }) {
     )
   })
   return (
-    <>
-      <div className="circle-box">
-        <svg className="circle-container" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1000 1000">
-          <g onClick={() => handleItemClick("none")}>
-            <circle
-              className={`circle ${selectedItems.find(a => a === "none") ? 'selected' : ''}`}
-              cx="40%"
-              cy="50%"
-              r="50" // Radius of emotion circles
-              stroke="currentColor"
-              strokeWidth="6"
-              fill="currentColor"
-            />
-            <text
-              x="40%"
-              y="50%" // Y position for circle text
-              textAnchor="middle"
-              alignmentBaseline='middle'
-              fill="black"
-              fontSize="18"
-            >
-              Neviens
-            </text>
-          </g>
-          <g onClick={() => handleItemClick("other")}>
-            <circle
-              className={`circle ${selectedItems.find(a => a === "other") ? 'selected' : ''}`}
-              cx="60%"
-              cy="50%"
-              r="50" // Radius of emotion circles
-              stroke="currentColor"
-              strokeWidth="6"
-              fill="currentColor"
-            />
-            <text
-              x="60%"
-              y="50%" // Y position for circle text
-              textAnchor="middle"
-              alignmentBaseline='middle'
-              fill="black"
-              fontSize="18"
-            >
-              Cits
-            </text>
+    <div>
+      <div className='test'>
+        <div className="wheel-box">
+          <svg className="wheel-container" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1000 1000">
+            <g onClick={() => handleItemClick("none")}>
+              <circle
+                className={`circle ${selectedItems.find(a => a === "none") ? 'selected' : ''}`}
+                cx="40%"
+                cy="50%"
+                r="50" // Radius of emotion circles
+                stroke="currentColor"
+                strokeWidth="6"
+                fill="currentColor"
+              />
+              <text
+                x="40%"
+                y="50%" // Y position for circle text
+                textAnchor="middle"
+                alignmentBaseline='middle'
+                fill="black"
+                fontSize="18"
+              >
+                Neviens
+              </text>
+            </g>
+            <g onClick={() => handleItemClick("other")}>
+              <circle
+                className={`circle ${selectedItems.find(a => a === "other") ? 'selected' : ''}`}
+                cx="60%"
+                cy="50%"
+                r="50" // Radius of emotion circles
+                stroke="currentColor"
+                strokeWidth="6"
+                fill="currentColor"
+              />
+              <text
+                x="60%"
+                y="50%" // Y position for circle text
+                textAnchor="middle"
+                alignmentBaseline='middle'
+                fill="black"
+                fontSize="18"
+              >
+                Cits
+              </text>
 
-          </g>
-          {wheelItems}
-        </svg>
+            </g>
+            {wheelItems}
+            <use xlinkHref={`#${currentItem?.id}`} />
+          </svg>
+        </div>
       </div>
       {showRating &&
         <Rate
@@ -179,6 +183,6 @@ export default function Circle({ selectedItems, setSelectedItems }) {
           handleDelete={handleDelete}
         />
       }
-    </>
+    </div>
   )
 }

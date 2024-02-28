@@ -12,9 +12,17 @@ export default function Participant({ setPage, participantId, setParticipantId }
   }
 
   return (
-    <div className='participant-container center'>
-      <input type='text' id='participantId' name='participantId' onChange={(e) => setParticipantId(e.target.value)} />
-      <button onClick={handleClick}>Tālāk</button>
+    <div className='main'>
+      <div className='participant-container'>
+        <p>Ievadiet savu identifikatoru</p>
+        <input
+          type='text'
+          id='participantId'
+          name='participantId'
+          maxLength={30}
+          onChange={(e) => setParticipantId(e.target.value)} />
+        <button className='btn' onClick={handleClick}>Tālāk</button>
+      </div>
     </div>
   )
 }
