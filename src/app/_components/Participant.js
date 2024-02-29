@@ -1,27 +1,44 @@
 import React from 'react'
+import Input from './Input'
 
 export default function Participant({ setPage, participantId, setParticipantId }) {
-  function handleClick(e) {
+
+  const handleKey = (e) => {
+    if (e.keyCode === 13) {
+      handleInput(e)
+    }
+  }
+
+  const handleInput = (e) => {
     e.preventDefault()
 
-    const regex = /^[a-zA-Z]{2}\d{4}$/;
-
-    if (participantId) {
+    if (validate()) {
       setPage(prev => prev + 1)
     }
+  }
+
+  const validate = () => {
+    const regex = /^[a-zA-Z]{2}\d{4}$/
+
+    if (participantId && participantId.match(regex)) {
+      return true
+    }
+
+    return false
   }
 
   return (
     <div className='main'>
       <div className='participant-container'>
         <p>Ievadiet savu identifikatoru</p>
-        <input
+        <Input
           type='text'
           id='participantId'
           name='participantId'
-          maxLength={30}
+          maxLength={6}
+          onKeyUp={handleKey}
           onChange={(e) => setParticipantId(e.target.value)} />
-        <button className='btn' onClick={handleClick}>Tālāk</button>
+        <button className='btn' onClick={handleInput}>Tālāk</button>
       </div>
     </div>
   )

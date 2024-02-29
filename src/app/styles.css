@@ -30,8 +30,8 @@
 
 .circle {
   color: #2F7285;
-  transition-timing-function: ease-in-out;
-  transition: r 0.1s;
+  transition-timing-function: ease-out;
+  transition: r 0.2s;
 }
 
 g text {
@@ -41,17 +41,13 @@ g text {
   /* IE 10 and IE 11 */
   user-select: none;
   /* Standard syntax */
-  transition: font-size 0.1s;
+  transition: font-size 0.2s;
 
-}
-
-g:hover .circle {
-  color: cadetblue;
 }
 
 .current {
   color: cadetblue;
-  r: 70;
+  /* r: 70; */
 }
 
 .current+text {
@@ -68,7 +64,7 @@ g:hover .circle {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 15px;
 }
 
 .rate-buttons {
@@ -111,11 +107,11 @@ g:hover .circle {
 .participant-container {
   margin: 0 auto;
   max-width: 900px;
-  padding: 5px;
+  padding: 0px 5px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
 /* Buttons */
@@ -140,12 +136,17 @@ g:hover .circle {
   background-image: linear-gradient(rgb(0 0 0/30%) 0 0);
 }
 
-.delete {
-  background-color: var(--red);
+button[disabled] {
+  background-color: gray;
+  cursor: default;
 }
 
-.add {
-  background-color: rgb(21 128 61);
+button[disabled]:hover {
+  background-image: none
+}
+
+.delete {
+  background-color: var(--red);
 }
 
 .center {
@@ -160,7 +161,7 @@ p {
 
 /* Input */
 
-#participantId {
+.text-input {
   width: 100%;
   max-width: 500px;
   padding: 10px 11px;
@@ -172,29 +173,34 @@ p {
   box-sizing: border-box;
 }
 
-#participantId:hover {
+.text-input {
   border: 1px solid black;
 }
 
-#participantId:focus {
+.text-input {
   outline: 3px solid rgb(97, 124, 235);
+}
+
+text {
+  font-size: 25px;
+  font-weight: bold;
 }
 
 /* Responsive */
 
-@media only screen and (max-width: 768px) {
-  .circle {
-    r: 59;
-  }
+@media only screen and (min-width: 768px) {
 
   .current {
     color: cadetblue;
-    r: 70;
   }
 
   text {
     font-size: 25px;
-    font-weight: bold;
+    font-weight: normal;
+  }
+
+  g:hover .circle {
+    color: cadetblue;
   }
 
   .rate-btn {
