@@ -1,4 +1,3 @@
-import React from 'react'
 import Input from './Input'
 
 export default function Participant({ setPage, participantId, setParticipantId }) {
@@ -38,7 +37,7 @@ export default function Participant({ setPage, participantId, setParticipantId }
           maxLength={6}
           onKeyUp={handleKey}
           onChange={(e) => setParticipantId(e.target.value)} />
-        <button className='btn' onClick={handleInput}>Tālāk</button>
+        <button className='btn select-none' onClick={handleInput}>Tālāk</button>
       </div>
     </div>
   )

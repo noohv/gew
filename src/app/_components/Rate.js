@@ -1,5 +1,3 @@
-"use client"
-import { useState, useEffect } from 'react'
 import '../styles.css'
 
 export default function Rate({ numOptions, rating, isSelected, handleChange, handleSave, handleDelete }) {
@@ -15,7 +13,7 @@ export default function Rate({ numOptions, rating, isSelected, handleChange, han
         onChange={handleChange}
         checked={index + 1 == rating}
       />
-      <p>{index + 1}</p>
+      <p className='select-none'>{index + 1}</p>
     </label>
   ))
 
@@ -28,12 +26,12 @@ export default function Rate({ numOptions, rating, isSelected, handleChange, han
         <div className='rate-buttons'>
           {isSelected ?
             <>
-              <button className='btn delete' onClick={handleDelete}>Noņemt</button>
-              <button className='btn add' onClick={handleSave}>Rediģēt</button>
+              <button className='btn delete select-none' onClick={handleDelete}>Noņemt</button>
+              <button className='btn add select-none' onClick={handleSave}>Rediģēt</button>
             </>
             :
             <>
-              <button className='btn add' disabled={!rating} onClick={handleSave}>Pievienot</button>
+              <button className='btn add select-none' disabled={!rating} onClick={handleSave}>Pievienot</button>
             </>
           }
         </div>
