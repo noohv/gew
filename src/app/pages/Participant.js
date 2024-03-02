@@ -1,4 +1,4 @@
-import Input from './Input'
+import Input from '../_components/Input'
 
 export default function Participant({ setPage, participantId, setParticipantId }) {
 

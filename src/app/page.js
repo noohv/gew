@@ -1,7 +1,8 @@
 "use client"
-import React, { useState, useEffect } from 'react'
-import Participant from './_components/Participant'
+import React, { useState } from 'react'
+import Participant from './pages/Participant'
 import Wheel from './_components/Wheel'
+import EmotionWheelPage from './pages/EmotionWheelPage'
 import './styles.css'
 
 export default function Home() {
@@ -14,7 +15,7 @@ export default function Home() {
       case 0:
         return <Participant page={page} setPage={setPage} participantId={participantId} setParticipantId={setParticipantId} />
       case 1:
-        return <Wheel
+        return <EmotionWheelPage
           selectedItems={selectedItems}
           setSelectedItems={setSelectedItems} />
       default:

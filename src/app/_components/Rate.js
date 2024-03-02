@@ -1,6 +1,6 @@
 import '../styles.css'
 
-export default function Rate({ numOptions, rating, isSelected, handleChange, handleSave, handleDelete }) {
+export default function Rate({ numOptions, rating, isSelected, handleChange, handleRatingSave, handleDelete }) {
 
   const options = Array.from({ length: numOptions }, (_, index) => (
     <button
@@ -24,11 +24,11 @@ export default function Rate({ numOptions, rating, isSelected, handleChange, han
           {isSelected ?
             <>
               <button className='btn delete select-none' onClick={handleDelete}>Noņemt</button>
-              <button className='btn add select-none' onClick={handleSave}>Rediģēt</button>
+              <button className='btn add select-none' onClick={handleRatingSave}>Rediģēt</button>
             </>
             :
             <>
-              <button className='btn add select-none' disabled={!rating} onClick={handleSave}>Pievienot</button>
+              <button className='btn add select-none' disabled={!rating} onClick={handleRatingSave}>Pievienot</button>
             </>
           }
         </div>
