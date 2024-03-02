@@ -129,10 +129,10 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
     )
   })
   return (
-    <div>
-      <div className='test'>
-        <div className="wheel-box">
-          <svg className="wheel-container" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+    <div className='container'>
+      <div className='container-top'>
+        <div className="wheel-container">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
             <g id='none' onClick={() => handleItemClick({ id: "none", name: "none" })}>
               <circle
                 className={clsx("circle", {
@@ -140,7 +140,7 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
                 })}
                 cx="40%"
                 cy="50%"
-                r={currentItem?.name == "none" ? '70' : '58'} // Radius of emotion circles
+                r={currentItem?.name == "none" ? '70' : '60'} // Radius of emotion circles
                 stroke="currentColor"
                 fill="currentColor"
               />
@@ -164,7 +164,7 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
                 })}
                 cx="60%"
                 cy="50%"
-                r={currentItem?.name == "other" ? '70' : '58'} // Radius of emotion circles
+                r={currentItem?.name == "other" ? '70' : '60'} // Radius of emotion circles
                 stroke="currentColor"
                 fill="currentColor"
               />
@@ -185,33 +185,38 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
           </svg>
         </div>
       </div>
-      {showRating &&
-        <Rate
-          numOptions={5}
-          rating={rating}
-          isSelected={selectedItems.find(a => a.name == currentItem.name)}
-          setRating={setRating}
-          handleChange={(e) => setRating(e.currentTarget.value)}
-          handleSave={handleSave}
-          handleDelete={handleDelete}
-        />
-      }
+      <div className='container-bottom'>
+        {showRating &&
+          <Rate
+            numOptions={5}
+            rating={rating}
+            isSelected={selectedItems.find(a => a.name == currentItem.name)}
+            setRating={setRating}
+            handleChange={(e) => setRating(e.currentTarget.value)}
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+          />
+        }
 
-      {currentItem?.name == "other" &&
-        <div className='center'>
-          <div className='participant-container'>
-            <p>Ievadiet emociju</p>
-            <Input
-              type='text'
-              name='participantId'
-              maxLength={30}
-              value={currentItem?.value}
-              onChange={(e) => setCurrentItem({ ...currentItem, value: e.target.value })}
-            />
-            <button className='btn' onClick={handleClick}>Pievienot</button>
+        {currentItem?.name == "other" &&
+          <div className='center'>
+            <div className='participant-container'>
+              <p>Ievadiet emociju</p>
+              <Input
+                type='text'
+                name='participantId'
+                maxLength={30}
+                value={currentItem?.value}
+                onChange={(e) => setCurrentItem({ ...currentItem, value: e.target.value })}
+              />
+              <button className='btn' onClick={handleClick}>Pievienot</button>
+            </div>
           </div>
+        }
+        <div className='save'>
+          <button className='btn' disabled={true}>Saglabāt</button>
         </div>
-      }
+      </div>
     </div>
   )
 }

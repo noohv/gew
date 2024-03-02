@@ -14,17 +14,38 @@
   align-items: center;
 }
 
-.wheel-box {
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.container-top {
+  margin: 30px 0px;
+  max-height: 70vh;
+}
+
+.container-bottom {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 80%;
+  max-width: 350px;
+  align-self: center;
+}
+
+.save {
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+.wheel-container {
   display: flex;
   justify-content: center;
   height: 100%;
 }
 
-.test {
-  height: 70vh;
-}
-
-.wheel-container {
+.wheel-container svg {
   flex: 1;
 }
 
@@ -68,13 +89,26 @@ g text {
   color: rgb(111, 159, 38);
 }
 
-.rate-container {
-  max-width: 300px;
-  display: flex;
+.rating-section {
+  /* display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 15px;
+  max-width: 350px;
+  padding: 0 5px; */
+
+  max-width: 350px;
+  width: 80%;
+  padding: 0px 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rating-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .rate-buttons {
@@ -84,30 +118,15 @@ g text {
   gap: 5px;
 }
 
-.rate-buttons button {
-  width: 100%;
-}
-
-.rate {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  gap: 5px;
-}
-
-.rate input {
-  display: none
-}
-
-.rate-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.rating-element {
   cursor: pointer;
-  height: 50px;
   width: 50px;
-  border-style: solid;
-  border-color: #2F7285;
+  height: 50px;
+  display: block;
+  background-color: hsla(215, 8%, 39%, 0.15);
+  border: none;
+  transition: background-color 150ms;
+  color: inherit;
 }
 
 .checked {
@@ -115,13 +134,13 @@ g text {
 }
 
 .participant-container {
-  margin: 0 auto;
-  max-width: 900px;
+  max-width: 350px;
+  width: 80%;
   padding: 0px 5px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 /* Buttons */
@@ -198,11 +217,12 @@ text {
 
 /* Responsive */
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 450px) {
 
-  /* .current {
-    color: cadetblue;
-  } */
+  .container-top {
+    height: 70vh;
+    margin: 0px;
+  }
 
   text {
     font-size: 25px;

@@ -3,24 +3,21 @@ import '../styles.css'
 export default function Rate({ numOptions, rating, isSelected, handleChange, handleSave, handleDelete }) {
 
   const options = Array.from({ length: numOptions }, (_, index) => (
-    <label key={index + 1} className={`rate-btn ${index + 1 == rating ? "checked" : ""}`} htmlFor={index + 1}>
-      <input
-        className="input-field"
-        type='radio'
-        name='rate'
-        id={index + 1}
-        value={index + 1}
-        onChange={handleChange}
-        checked={index + 1 == rating}
-      />
-      <p className='select-none'>{index + 1}</p>
-    </label>
+    <button
+      key={index}
+      type="button"
+      className={`rating-element select-none ${index + 1 == rating ? "checked" : ""}`}
+      onClick={handleChange}
+      value={index + 1}
+    >
+      {index + 1}
+    </button>
   ))
 
   return (
     <div className='center'>
-      <div className='rate-container'>
-        <div className='rate'>
+      <div className='rating-section'>
+        <div className='rating-bar-container'>
           {options}
         </div>
         <div className='rate-buttons'>
