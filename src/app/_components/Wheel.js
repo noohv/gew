@@ -69,8 +69,10 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
 
   // 
   const handleClick = () => {
-    resetData()
-    setSelectedItems([currentItem])
+    if (currentItem?.value) {
+      resetData()
+      setSelectedItems([currentItem])
+    }
   }
 
   const wheelItems = emotions.map((emotion, index) => {
@@ -152,10 +154,10 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
                 type='text'
                 name='participantId'
                 maxLength={30}
-                value={currentItem?.value}
+                value={currentItem?.value || ''}
                 onChange={(e) => setCurrentItem({ ...currentItem, value: e.target.value })}
               />
-              <button className='btn' onClick={handleClick}>Pievienot</button>
+              <button className='btn' disabled={currentItem?.value ? false : true} onClick={handleClick}>Pievienot</button>
             </div>
           </div>
         }
