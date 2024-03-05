@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import Wheel from '../_components/Wheel'
 
-export default function EmotionWheelPage({ selectedItems, setSelectedItems }) {
+export default function EmotionWheelPage({ setPage, selectedItems, setSelectedItems }) {
+
   const handleSave = () => {
     if (!isEmpty()) {
-      console.log("SAVED")
+      setSelectedItems([{}])
+      setPage(prev => prev + 1)
     }
   }
 
