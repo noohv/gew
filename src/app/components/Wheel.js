@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import Rate from '../_components/Rate';
-import Input from '../_components/Input';
+import Rate from './Rate';
+import Input from './Input';
 import EmotionCircle from './EmotionCircle';
 import emotions from '../utils/emotions.js';
 import '../styles.css';
+import OtherEmotions from './OtherEmotions';
 
 export default function Wheel({ selectedItems, setSelectedItems }) {
   const [currentItem, setCurrentItem] = useState()
@@ -33,7 +34,7 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
         setSelectedItems(updatedItems)
       }
 
-      else if (selectedItems[0]?.id === "other") setSelectedItems([{ ...currentItem, rating: rating }])
+      // else if (selectedItems[0]?.id === "other") setSelectedItems([{ ...currentItem, rating: rating }])
       else setSelectedItems(prev => [...prev, { ...currentItem, rating: rating }])
       resetData()
     }
@@ -67,12 +68,32 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
     }
   }
 
+
+  const addEmotionToOther = () => {
+    setSelectedItems(prevData => {
+      return prevData.map(emotion => {
+        if (emotion.id === "other") {
+          return {
+            ...emotion,
+            emotions: [
+              ...emotion.emotions,
+              { name: currentItem?.value, rating: rating }
+            ]
+          };
+        }
+        return emotion;
+      });
+    });
+  };
+
   // 
   const handleClick = () => {
-    if (currentItem?.value) {
-      resetData()
-      setSelectedItems([currentItem])
+    if(selectedItems.find(a => a.id === "other")) {
+      addEmotionToOther()
+    } else {
+      setSelectedItems(prev => [...prev, { id: currentItem.id, name: currentItem.name, emotions: [{ name: currentItem?.value, rating: rating }] }])
     }
+    resetData()
   }
 
   const wheelItems = emotions.map((emotion, index) => {
@@ -98,6 +119,7 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
       />
     )
   })
+	console.log(selectedItems)
 
   return (
     <div className='emotion-wheel-container'>
@@ -147,19 +169,27 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
         }
 
         {currentItem?.id == "other" &&
-          <div className='center'>
-            <div className='participant-container'>
-              <p>Ievadiet emociju</p>
-              <Input
-                type='text'
-                name='participantId'
-                maxLength={30}
-                value={currentItem?.value || ''}
-                onChange={(e) => setCurrentItem({ ...currentItem, value: e.target.value })}
-              />
-              <button className='btn' disabled={currentItem?.value ? false : true} onClick={handleClick}>Pievienot</button>
-            </div>
-          </div>
+          // <div className='center'>
+          //   <div className='participant-container'>
+          //     <p>Ievadiet emociju</p>
+          //     <Input
+          //       type='text'
+          //       name='participantId'
+          //       maxLength={30}
+          //       value={currentItem?.value || ''}
+          //       onChange={(e) => setCurrentItem({ ...currentItem, value: e.target.value })}
+          //     />
+          //     <button className='btn' disabled={currentItem?.value ? false : true} onClick={handleClick}>Pievienot</button>
+          //   </div>
+          // </div>
+          <OtherEmotions 
+            selectedItems={selectedItems}
+            currentItem={currentItem}
+            setCurrentItem={setCurrentItem}
+            handleClick={handleClick}
+            rating={rating}
+            handleChange={(e) => setRating(e.currentTarget.value)}
+          />
         }
       </div>
 

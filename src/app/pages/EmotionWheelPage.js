@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Wheel from '../_components/Wheel'
+import Wheel from '../components/Wheel'
 
 export default function EmotionWheelPage({ setPage, selectedItems, setSelectedItems }) {
 
