@@ -6,7 +6,7 @@ import FinalPage from './pages/FinalPage'
 import './styles.css'
 
 export default function Home() {
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(1)
   const [participantId, setParticipantId] = useState()
   const [selectedItems, setSelectedItems] = useState([])
 
