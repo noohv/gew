@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import Rate from "./Rate";
+import Rate2 from "./Rate2";
 import Input from "./Input";
 import EmotionCircle from "./EmotionCircle";
 import emotions from "../utils/emotions.js";
@@ -177,31 +178,45 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
       </div>
       <div className="container-bottom">
         {showRating && (
-          <Rate
-            numOptions={5}
-            rating={rating}
-            isSelected={selectedItems.find((a) => a.id == currentItem.id)}
-            setRating={setRating}
-            handleChange={(e) => setRating(e.currentTarget.value)}
-            handleRatingSave={handleRatingSave}
-            handleDelete={handleDelete}
-          />
+          <div className="center">
+            <div className="participant-container">
+              <Rate2
+                rating={rating}
+                handleChange={(e) => setRating(e.currentTarget.value)}
+              />
+              <div className="rate-buttons">
+                {selectedItems.find((a) => a.id == currentItem.id) ? (
+                  <>
+                    <button
+                      className="btn delete select-none"
+                      onClick={handleDelete}
+                    >
+                      Noņemt
+                    </button>
+                    <button
+                      className="btn add select-none"
+                      onClick={handleRatingSave}
+                    >
+                      Rediģēt
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="btn add select-none"
+                      disabled={!rating}
+                      onClick={handleRatingSave}
+                    >
+                      Pievienot
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
         )}
 
         {currentItem?.id == "other" && (
-          // <div className='center'>
-          //   <div className='participant-container'>
-          //     <p>Ievadiet emociju</p>
-          //     <Input
-          //       type='text'
-          //       name='participantId'
-          //       maxLength={30}
-          //       value={currentItem?.value || ''}
-          //       onChange={(e) => setCurrentItem({ ...currentItem, value: e.target.value })}
-          //     />
-          //     <button className='btn' disabled={currentItem?.value ? false : true} onClick={handleClick}>Pievienot</button>
-          //   </div>
-          // </div>
           <OtherEmotions
             selectedItems={selectedItems}
             currentItem={currentItem}
