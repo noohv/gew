@@ -1,12 +1,11 @@
 :root {
-  --main-color: #38B261;
+  --main-color: #38b261;
   --white: #fff;
   --black: #000000;
   --red: #d11a2a;
 
   --default: #d6d6d6;
   --selected: #888888;
-
 }
 
 .main {
@@ -111,7 +110,7 @@ g text {
   color: var(--selected);
 }
 
-.current+text {
+.current + text {
   font-size: 30px;
 }
 
@@ -125,7 +124,6 @@ g text {
 
 .rating-section {
   max-width: 350px;
-  width: 80%;
   padding: 0px 5px;
   display: flex;
   align-items: center;
@@ -155,6 +153,16 @@ g text {
   border: none;
   transition: background-color 150ms;
   color: inherit;
+}
+
+.rating-intensity {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating-intensity p {
+  font-size: 0.7rem;
 }
 
 .checked {
@@ -199,7 +207,7 @@ button[disabled] {
 }
 
 button[disabled]:hover {
-  background-image: none
+  background-image: none;
 }
 
 .delete {
@@ -222,12 +230,20 @@ p {
   width: 100%;
   max-width: 500px;
   padding: 10px 11px;
-  border: 1px solid #DAE2ED;
+  border: 1px solid #dae2ed;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
   line-height: 1.5;
   font-size: 1rem;
   box-sizing: border-box;
+}
+
+.input-name {
+  width: 100%;
+}
+
+.input-name p {
+  font-size: 0.8rem;
 }
 
 .text-input:hover {
@@ -246,7 +262,6 @@ text {
 /* Screens >450px */
 
 @media only screen and (min-width: 450px) {
-
   .container-top {
     height: 70vh;
     margin: 0px;
@@ -260,7 +275,6 @@ text {
   g:hover .circle {
     filter: brightness(0.9);
   }
-
 
   .rate-btn {
     height: 40px;

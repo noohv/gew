@@ -1,44 +1,50 @@
-import Input from '../components/Input'
+import Input from "../components/Input";
 
-export default function Participant({ setPage, participantId, setParticipantId }) {
-
+export default function Participant({
+  setPage,
+  participantId,
+  setParticipantId,
+}) {
   const handleKey = (e) => {
     if (e.keyCode === 13) {
-      handleInput(e)
+      handleInput(e);
     }
-  }
+  };
 
   const handleInput = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (validate()) {
-      setPage(prev => prev + 1)
+      setPage((prev) => prev + 1);
     }
-  }
+  };
 
   const validate = () => {
-    const regex = /^[a-zA-Z]{2}\d{4}$/
+    const regex = /^[a-zA-Z]{2}\d{4}$/;
 
     if (participantId && participantId.match(regex)) {
-      return true
+      return true;
     }
 
-    return false
-  }
+    return false;
+  };
 
   return (
-    <div className='main'>
-      <div className='participant-container'>
+    <div className="main">
+      <div className="participant-container">
         <p>Ievadiet savu identifikatoru</p>
         <Input
-          type='text'
-          id='participantId'
-          name='participantId'
+          type="text"
+          id="participantId"
+          name="participantId"
           maxLength={6}
           onKeyUp={handleKey}
-          onChange={(e) => setParticipantId(e.target.value)} />
-        <button className='btn select-none' onClick={handleInput}>Tālāk</button>
+          onChange={(e) => setParticipantId(e.target.value)}
+        />
+        <button className="btn select-none" onClick={handleInput}>
+          Tālāk
+        </button>
       </div>
     </div>
-  )
+  );
 }
