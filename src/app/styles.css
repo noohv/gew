@@ -3,6 +3,10 @@
   --white: #fff;
   --black: #000000;
   --red: #d11a2a;
+
+  --default: #d6d6d6;
+  --selected: #888888;
+
 }
 
 .main {
@@ -80,7 +84,7 @@ path {
 }
 
 .circle {
-  color: #2F7285;
+  color: var(--default);
   transition-timing-function: ease-out;
   transition: r 0.2s;
 }
@@ -104,7 +108,7 @@ g text {
 }
 
 .current {
-  color: cadetblue;
+  color: var(--selected);
 }
 
 .current+text {
@@ -112,11 +116,11 @@ g text {
 }
 
 .selected {
-  color: greenyellow;
+  color: var(--selected);
 }
 
 .selected-current {
-  color: rgb(111, 159, 38);
+  filter: brightness(0.9);
 }
 
 .rating-section {
@@ -147,14 +151,14 @@ g text {
   width: 50px;
   height: 50px;
   display: block;
-  background-color: hsla(215, 8%, 39%, 0.15);
+  background-color: var(--default);
   border: none;
   transition: background-color 150ms;
   color: inherit;
 }
 
 .checked {
-  background-color: #2F7285;
+  background-color: var(--selected);
 }
 
 .participant-container {
@@ -254,12 +258,9 @@ text {
   }
 
   g:hover .circle {
-    color: cadetblue;
+    filter: brightness(0.9);
   }
 
-  g:hover .selected {
-    color: rgb(117, 171, 37);
-  }
 
   .rate-btn {
     height: 40px;
