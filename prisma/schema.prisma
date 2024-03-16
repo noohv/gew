@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Emotions {
+  id            Int @id @default(autoincrement())
+  createdAt     DateTime @default(now()) @db.Timestamp(6)
+  participantId String
+  em01          Int?
+  em02          Int?
+  em03          Int?
+  em04          Int?
+  em05          Int?
+  em06          Int?
+  em07          Int?
+  em08          Int?
+  em09          Int?
+  em10          Int?
+  em11          Int?
+  em12          Int?
+  em13          Int?
+  em14          Int?
+  em15          Int?
+  em16          Int?
+  em17          Int?
+  em18          Int?
+  em19          Int?
+  em20          Int?
+  other         Other[]
+}
+
+model Other {
+  id      Int @id @default(autoincrement())
+  name    String
+  rating  Int
+  entry   Emotions @relation(fields: [entryId], references: [id])
+  entryId Int
+}

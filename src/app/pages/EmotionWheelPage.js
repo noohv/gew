@@ -7,10 +7,30 @@ export default function EmotionWheelPage({
   selectedItems,
   setSelectedItems,
 }) {
+  const convertToNewFormat = async (originalData) => {
+    const result = {};
+
+    originalData.forEach((item) => {
+      const { id, rating } = item;
+      result[id] = parseInt(rating);
+    });
+
+    return result;
+  };
+
   const handleSave = () => {
     if (!isEmpty()) {
-      setSelectedItems([{}]);
-      setPage((prev) => prev + 1);
+      const postData = async () => {
+        const data = await convertToNewFormat(selectedItems);
+        const response = await fetch("api/save", {
+          method: "POST",
+          body: JSON.stringify(data),
+        });
+      };
+      postData().then(() => {
+        setSelectedItems([{}]);
+        setPage((prev) => prev + 1);
+      });
     }
   };
 
