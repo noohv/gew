@@ -33,10 +33,7 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
         });
 
         setSelectedItems(updatedItems);
-      }
-
-      // else if (selectedItems[0]?.id === "other") setSelectedItems([{ ...currentItem, rating: rating }])
-      else
+      } else
         setSelectedItems((prev) => [
           ...prev,
           { ...currentItem, rating: rating },
@@ -62,9 +59,9 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
       setShowRating(false);
       setSelectedItems([emotion]);
     } else if (emotion.id === "other") {
-      if (selectedItems[0]?.id === "other") setCurrentItem(selectedItems[0]);
       if (selectedItems[0]?.id === "none") setSelectedItems([]);
       setShowRating(false);
+      setRating(undefined);
     } else {
       if (selectedItems[0]?.id === "none") setSelectedItems([]);
       setShowRating(true);
@@ -219,10 +216,12 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
         {currentItem?.id == "other" && (
           <OtherEmotions
             selectedItems={selectedItems}
+            setSelectedItems={setSelectedItems}
             currentItem={currentItem}
             setCurrentItem={setCurrentItem}
             handleClick={handleClick}
             rating={rating}
+            setRating={setRating}
             handleChange={(e) => setRating(e.currentTarget.value)}
           />
         )}

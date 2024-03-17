@@ -9,8 +9,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Emotions {
@@ -45,6 +46,6 @@ model Other {
   id      Int @id @default(autoincrement())
   name    String
   rating  Int
-  entry   Emotions @relation(fields: [entryId], references: [id])
+  entry   Emotions @relation(fields: [entryId], references: [id], onDelete: Cascade)
   entryId Int
 }

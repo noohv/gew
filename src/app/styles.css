@@ -62,7 +62,7 @@
   padding: 10px;
 }
 
-.save .btn svg {
+.btn svg {
   display: block;
   margin: auto;
   height: 50%;
@@ -111,7 +111,7 @@ g text {
 }
 
 .current + text {
-  font-size: 30px;
+  font-size: 40px;
 }
 
 .selected {
@@ -214,6 +214,10 @@ button[disabled]:hover {
   background-color: var(--red);
 }
 
+.cancel {
+  background-color: var(--selected);
+}
+
 .center {
   display: flex;
   justify-content: center;
@@ -255,8 +259,26 @@ p {
 }
 
 text {
-  font-size: 25px;
+  font-size: 35px;
   font-weight: bold;
+}
+
+.other-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.other-list li {
+  display: flex;
+  flex-direction: row;
+}
+
+.page-title {
+  text-align: center;
+  padding: 0 10px;
 }
 
 /* Screens >450px */

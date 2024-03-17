@@ -21,6 +21,7 @@ export default function Participant({
 
   const validate = () => {
     const regex = /^[a-zA-Z]{2}\d{4}$/;
+    setParticipantId(participantId.toLowerCase());
 
     if (participantId && participantId.match(regex)) {
       return true;
