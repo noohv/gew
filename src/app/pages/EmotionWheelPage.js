@@ -1,31 +1,19 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import Wheel from "../components/Wheel";
+import { saveData } from "../actions/actions";
 
 export default function EmotionWheelPage({
   setPage,
+  participantId,
   selectedItems,
   setSelectedItems,
 }) {
-  const convertToNewFormat = async (originalData) => {
-    const result = {};
-
-    originalData.forEach((item) => {
-      const { id, rating } = item;
-      result[id] = parseInt(rating);
-    });
-
-    return result;
-  };
-
   const handleSave = () => {
     if (!isEmpty()) {
       const postData = async () => {
-        const data = await convertToNewFormat(selectedItems);
-        const response = await fetch("api/save", {
-          method: "POST",
-          body: JSON.stringify(data),
-        });
+        const response = await saveData(participantId, selectedItems);
+        console.log(response);
       };
       postData().then(() => {
         setSelectedItems([{}]);

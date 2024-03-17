@@ -17,6 +17,7 @@ model Emotions {
   id            Int @id @default(autoincrement())
   createdAt     DateTime @default(now()) @db.Timestamp(6)
   participantId String
+  none          Boolean @default(false)
   em01          Int?
   em02          Int?
   em03          Int?
