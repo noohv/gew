@@ -9,7 +9,10 @@ export default function EmotionWheelPage({
   selectedItems,
   setSelectedItems,
 }) {
+  const [showSave, setShowSave] = useState(true);
+
   const handleSave = () => {
+    setShowSave(false);
     if (!isEmpty()) {
       const postData = async () => {
         const response = await saveData(participantId, selectedItems);
@@ -28,7 +31,7 @@ export default function EmotionWheelPage({
 
   return (
     <div className="container">
-      <h3 style={{ textAlign: "center" }}>
+      <h3 className="page-title">
         Lūdzu, novērtējiet, savu šā brīža emocionālo stāvokli!
       </h3>
       <Wheel
@@ -38,7 +41,7 @@ export default function EmotionWheelPage({
 
       <div
         className={clsx("save", {
-          ["show"]: !isEmpty(),
+          ["show"]: !isEmpty() && showSave,
         })}
       >
         <button className="btn" disabled={isEmpty()} onClick={handleSave}>

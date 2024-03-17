@@ -26,8 +26,6 @@ export async function saveData(participantId, data) {
     return result;
   };
 
-  console.log(await convertToNewFormat(data));
-
   const { other, ...rest } = await convertToNewFormat(data);
   const result = await prisma.emotions.create({
     data: {
