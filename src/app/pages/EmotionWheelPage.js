@@ -16,7 +16,6 @@ export default function EmotionWheelPage({
     if (!isEmpty()) {
       const postData = async () => {
         const response = await saveData(participantId, selectedItems);
-        console.log(response);
       };
       postData().then(() => {
         setSelectedItems([{}]);
