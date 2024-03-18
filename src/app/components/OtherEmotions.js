@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import clsx from "clsx";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
-import Rate2 from "./Rate2";
+import Rate from "./Rate";
 import OtherEmotionList from "./OtherEmotionList";
 
 export default function OtherEmotions({
@@ -16,10 +15,14 @@ export default function OtherEmotions({
 }) {
   const [editMode, setEditMode] = useState(false);
   const [editIndex, setEditIndex] = useState();
-
   const otherEmotions = selectedItems.find(
     (item) => item.id == "other"
   )?.emotions;
+  const [showInputs, setShowInputs] = useState(!otherEmotions);
+
+  useEffect(() => {
+    setShowInputs(!otherEmotions || editMode);
+  }, [otherEmotions, editMode]);
 
   const deleteItem = (index) => {
     const updatedItems = [...otherEmotions];
@@ -44,6 +47,7 @@ export default function OtherEmotions({
           return emotion;
         });
       });
+      cancelEdit();
     }
   };
 
@@ -57,6 +61,7 @@ export default function OtherEmotions({
     };
     setCurrentItem(editData);
     setRating(otherEmotions[index].rating);
+    setShowInputs(true);
   };
 
   const saveEdit = () => {
@@ -86,45 +91,46 @@ export default function OtherEmotions({
     setEditMode(false);
     setCurrentItem((prev) => ({ id: prev.id, name: prev.name }));
     setRating(undefined);
+    setShowInputs(false);
   };
 
   return (
     <div className="center">
       <div className="participant-container">
-        <div className="input-name">
-          <p>Emocijas nosaukums</p>
-        </div>
-        <Input
-          type="text"
-          name="participantId"
-          maxLength={30}
-          value={currentItem?.value || ""}
-          onChange={(e) =>
-            setCurrentItem({ ...currentItem, value: e.target.value })
-          }
-        />
-        <Rate2 rating={rating} handleChange={handleChange} />
-
-        {editMode ? (
+        {showInputs ? (
           <>
-            <button className="btn cancel" onClick={cancelEdit}>
-              Atcelt
-            </button>
-            <button
-              className="btn"
-              disabled={currentItem?.value && rating ? false : true}
-              onClick={saveEdit}
-            >
-              Rediģēt
-            </button>
+            <div className="input-name">
+              <p>Emocijas nosaukums</p>
+            </div>
+            <Input
+              type="text"
+              name="participantId"
+              maxLength={30}
+              value={currentItem?.value || ""}
+              onChange={(e) =>
+                setCurrentItem({ ...currentItem, value: e.target.value })
+              }
+            />
+            <Rate rating={rating} handleChange={handleChange} />
+
+            <div className="rate-buttons">
+              {otherEmotions && (
+                <button className="btn cancel" onClick={cancelEdit}>
+                  Atcelt
+                </button>
+              )}
+              <button
+                className="btn"
+                disabled={currentItem?.value && rating ? false : true}
+                onClick={editMode ? saveEdit : handleClick}
+              >
+                {editMode ? "Rediģēt" : "Pievienot"}
+              </button>
+            </div>
           </>
         ) : (
-          <button
-            className="btn"
-            disabled={currentItem?.value && rating ? false : true}
-            onClick={handleClick}
-          >
-            Pievienot
+          <button className="btn" onClick={() => setShowInputs(true)}>
+            Pievienot vēl
           </button>
         )}
         {otherEmotions && (
