@@ -1,13 +1,6 @@
 import "../styles.css";
 
-export default function Rate({
-  numOptions,
-  rating,
-  isSelected,
-  handleChange,
-  handleRatingSave,
-  handleDelete,
-}) {
+export default function Rate({ numOptions = 5, rating, handleChange }) {
   const options = Array.from({ length: numOptions }, (_, index) => (
     <button
       key={index}
@@ -23,34 +16,14 @@ export default function Rate({
   ));
 
   return (
-    <div className="center">
-      <div className="rating-section">
-        <div className="rating-bar-container">{options}</div>
-        <div className="rate-buttons">
-          {isSelected ? (
-            <>
-              <button className="btn delete select-none" onClick={handleDelete}>
-                Noņemt
-              </button>
-              <button
-                className="btn add select-none"
-                onClick={handleRatingSave}
-              >
-                Rediģēt
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                className="btn add select-none"
-                disabled={!rating}
-                onClick={handleRatingSave}
-              >
-                Pievienot
-              </button>
-            </>
-          )}
-        </div>
+    <div className="rating-section">
+      <div className="input-name">
+        <p>Emocijas intensitāte</p>
+      </div>
+      <div className="rating-bar-container">{options}</div>
+      <div className="rating-intensity">
+        <p>Vāja</p>
+        <p>Stipra</p>
       </div>
     </div>
   );

@@ -88,14 +88,13 @@ path {
   transition: r 0.2s;
 }
 
-g text {
+text {
   -webkit-user-select: none;
   /* Safari */
   -ms-user-select: none;
   /* IE 10 and IE 11 */
   user-select: none;
   /* Standard syntax */
-  transition: font-size 0.2s;
 }
 
 .select-none {
@@ -110,7 +109,7 @@ g text {
   color: var(--selected);
 }
 
-.current + text {
+text.current {
   font-size: 40px;
 }
 
@@ -156,7 +155,7 @@ g text {
 }
 
 .rating-intensity {
-  width: 100%;
+  width: 95%;
   display: flex;
   justify-content: space-between;
 }
@@ -215,7 +214,8 @@ button[disabled]:hover {
 }
 
 .cancel {
-  background-color: var(--selected);
+  background-color: var(--default);
+  color: var(--black);
 }
 
 .center {
@@ -247,7 +247,7 @@ p {
 }
 
 .input-name p {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .text-input:hover {
@@ -263,17 +263,45 @@ text {
   font-weight: bold;
 }
 
-.other-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
+.other-container {
+  width: 100%;
 }
 
-.other-list li {
+.other-container p {
+  font-size: 1rem;
+}
+
+.other-list {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.other-list button {
+  height: 42px;
+  width: 42px;
+}
+
+.other-btns {
+  display: flex;
+  gap: 5px;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-item-text {
+  display: flex;
+  align-items: center;
+  max-width: 60%;
+}
+
+.list-item-text p {
+  font-size: 0.9rem;
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
 
 .page-title {
@@ -292,6 +320,11 @@ text {
   text {
     font-size: 25px;
     font-weight: normal;
+  }
+
+  text.current {
+    font-size: 30px;
+    pointer-events: none;
   }
 
   g:hover .circle {

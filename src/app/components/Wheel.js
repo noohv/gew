@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import Rate from "./Rate";
-import Rate2 from "./Rate2";
-import Input from "./Input";
 import EmotionCircle from "./EmotionCircle";
 import emotions from "../utils/emotions.js";
 import "../styles.css";
@@ -104,11 +102,63 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
     resetData();
   };
 
-  const wheelItems = emotions.map((emotion, index) => {
-    const startAngle = (-100 * Math.PI) / 180;
+  /**
+   * Calculates the X position for rendering text based on the provided parameters.
+   * @param {number} cx - Center X coordinate.
+   * @param {object} emotion - Emotion object containing information such as ID and name.
+   * @param {number} angle - Angle to determine text position.
+   * @returns {number} - Calculated X position.
+   */
+  const textPositionX = (cx, emotion, angle) => {
+    let x = cx;
+
+    // Adjust X position based on angle range
+    if (angle > -1.4 && angle < 1.5) {
+      // Fine-tune X position for the current item's emotion
+      x = currentItem?.id === emotion.id ? x - 6 : x - 5;
+    }
+    if (angle > 1.5 || angle < -1.4) {
+      // Fine-tune X position for the current item's emotion
+      x =
+        currentItem?.id === emotion.id
+          ? Number(x) + Number(6)
+          : Number(x) + Number(5);
+    }
+    // Additional adjustment for specific emotion
+    if (emotion.name === "Apmierinātība") {
+      // Fine-tune X position for the current item's emotion
+      x =
+        currentItem?.id === emotion.id
+          ? Number(x) + Number(15)
+          : Number(x) + Number(13);
+    }
+
+    return x;
+  };
+
+  /**
+   * Calculates the coordinates (cx, cy) and angle for a given index within a circular layout.
+   * @param {number} index - Index of the element within the circular layout.
+   * @returns {Object} - Object containing calculated coordinates (cx, cy) and angle.
+   */
+  const calculateCoordinates = (index) => {
+    // Define the starting angle of the circular layout
+    const startAngle = (-80 * Math.PI) / 180;
+
+    // Calculate the angle based on the index and total number of elements
     const angle = startAngle + (index / emotions.length) * 2 * Math.PI;
+
+    // Calculate the X coordinate (cx) using trigonometric functions
     const cx = (50 + 40 * Math.cos(angle)).toPrecision(12);
+
+    // Calculate the Y coordinate (cy) using trigonometric functions
     const cy = (50 + 40 * Math.sin(angle)).toPrecision(12);
+
+    return { cx, cy, angle };
+  };
+
+  const wheelItems = emotions.map((emotion, index) => {
+    const { cx, cy } = calculateCoordinates(index);
 
     return (
       <EmotionCircle
@@ -131,7 +181,32 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
       />
     );
   });
-  console.log(selectedItems);
+
+  const wheelText = emotions.map((emotion, index) => {
+    const { cx, cy, angle } = calculateCoordinates(index);
+
+    return (
+      <text
+        key={`${emotion.id}-text`}
+        id={`${emotion.id}-text`}
+        className={`${currentItem?.id === emotion.id ? "current" : ""}`}
+        pointerEvents="none"
+        x={`${textPositionX(cx, emotion, angle)}%`}
+        y={`${cy}%`}
+        textAnchor={clsx({
+          ["start"]:
+            angle > -1.4 && angle < 1.5 && emotion.name != "Apmierinātība",
+          ["end"]:
+            angle > 1.5 || angle < -1.4 || emotion.name == "Apmierinātība",
+        })}
+        dominantBaseline="middle"
+        fill="black"
+        fontSize="18"
+      >
+        {emotion.name}
+      </text>
+    );
+  });
 
   return (
     <div className="emotion-wheel-container">
@@ -151,6 +226,35 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
               handleItemClick={handleItemClick}
               currentItem={currentItem}
             />
+            <text
+              id="none-text"
+              className={clsx({
+                ["current"]: currentItem?.id === "none",
+              })}
+              pointerEvents="none"
+              x="40%"
+              y="50%"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fill="black"
+              fontSize="18"
+            >
+              Neviens
+            </text>
+
+            <text
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fill="black"
+              fontSize="18"
+              x="60%"
+              y="60%"
+            >
+              {`Skaits: ${
+                selectedItems.find((a) => a.id === "other")?.emotions.length ||
+                0
+              }`}
+            </text>
             <EmotionCircle
               className={clsx({
                 ["selected-current"]:
@@ -168,8 +272,25 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
               handleItemClick={handleItemClick}
               currentItem={currentItem}
             />
+
+            <text
+              id="other-text"
+              className={`${currentItem?.id === "other" ? "current" : ""}`}
+              pointerEvents="none"
+              x="60%"
+              y="50%"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fill="black"
+              fontSize="18"
+            >
+              Cits
+            </text>
+
             {wheelItems}
+            {wheelText}
             <use xlinkHref={`#${currentItem?.id}`} />
+            <use xlinkHref={`#${currentItem?.id}-text`} />
           </svg>
         </div>
       </div>
@@ -177,7 +298,7 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
         {showRating && (
           <div className="center">
             <div className="participant-container">
-              <Rate2
+              <Rate
                 rating={rating}
                 handleChange={(e) => setRating(e.currentTarget.value)}
               />
