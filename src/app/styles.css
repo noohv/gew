@@ -8,6 +8,12 @@
   --selected: #888888;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .main {
   height: 100vh;
   width: auto;
@@ -21,12 +27,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
 }
 
 .container-top {
@@ -43,6 +43,12 @@
   align-self: center;
 }
 
+.page-title {
+  text-align: center;
+  padding: 0 10px;
+}
+
+/* Save button */
 .save {
   position: fixed;
   bottom: 15px;
@@ -74,6 +80,8 @@ path {
   fill: white;
 }
 
+/* Emotion Wheel */
+
 .wheel-container {
   display: flex;
   justify-content: center;
@@ -97,7 +105,11 @@ text {
   /* IE 10 and IE 11 */
   user-select: none;
   /* Standard syntax */
+  font-size: 35px;
+  font-weight: bold;
 }
+
+/* Selected/Current items */
 
 .select-none {
   -webkit-user-select: none;
@@ -122,6 +134,8 @@ text.current {
 .selected-current {
   filter: brightness(0.9);
 }
+
+/* Intensity Rating */
 
 .rating-section {
   padding: 0px 5px;
@@ -260,11 +274,7 @@ p {
   outline: 3px solid rgb(97, 124, 235);
 }
 
-text {
-  font-size: 35px;
-  font-weight: bold;
-}
-
+/* Other Emotions */
 .other-container {
   width: 100%;
 }
@@ -306,13 +316,7 @@ text {
   overflow-wrap: break-word;
 }
 
-.page-title {
-  text-align: center;
-  padding: 0 10px;
-}
-
 /* Screens >450px */
-
 @media only screen and (min-width: 450px) {
   .container-top {
     height: 70vh;
