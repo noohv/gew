@@ -1,5 +1,12 @@
-import "../styles.css";
+import React from "react";
 
+/**
+ * Rating component.
+ * @param {number} numOptions - Number of options for rating. Default - 5
+ * @param {number} rating - Current rating.
+ * @param {function} handleChange - Function which handles rating change.
+ * @returns {React.JSX.Element} - JSX component.
+ */
 export default function Rate({ numOptions = 5, rating, handleChange }) {
   const options = Array.from({ length: numOptions }, (_, index) => (
     <button

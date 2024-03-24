@@ -8,6 +8,12 @@
   --selected: #888888;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .main {
   height: 100vh;
   width: auto;
@@ -23,12 +29,6 @@
   height: 100%;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
 .container-top {
   margin-top: 30px;
   max-height: 70vh;
@@ -39,10 +39,16 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  max-width: 350px;
+  max-width: 370px;
   align-self: center;
 }
 
+.page-title {
+  text-align: center;
+  padding: 0 10px;
+}
+
+/* Save button */
 .save {
   position: fixed;
   bottom: 15px;
@@ -59,7 +65,9 @@
   height: 70px;
   width: 70px;
   border-radius: 50%;
-  padding: 10px;
+  background-color: var(--default);
+  color: var(--black);
+  font-weight: bold;
 }
 
 .btn svg {
@@ -71,6 +79,8 @@
 path {
   fill: white;
 }
+
+/* Emotion Wheel */
 
 .wheel-container {
   display: flex;
@@ -95,7 +105,11 @@ text {
   /* IE 10 and IE 11 */
   user-select: none;
   /* Standard syntax */
+  font-size: 35px;
+  font-weight: bold;
 }
+
+/* Selected/Current items */
 
 .select-none {
   -webkit-user-select: none;
@@ -121,8 +135,9 @@ text.current {
   filter: brightness(0.9);
 }
 
+/* Intensity Rating */
+
 .rating-section {
-  max-width: 350px;
   padding: 0px 5px;
   display: flex;
   align-items: center;
@@ -133,6 +148,7 @@ text.current {
 .rating-bar-container {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
@@ -169,7 +185,7 @@ text.current {
 }
 
 .participant-container {
-  max-width: 350px;
+  max-width: 400px;
   width: 80%;
   padding: 0px 5px;
   display: flex;
@@ -258,11 +274,7 @@ p {
   outline: 3px solid rgb(97, 124, 235);
 }
 
-text {
-  font-size: 35px;
-  font-weight: bold;
-}
-
+/* Other Emotions */
 .other-container {
   width: 100%;
 }
@@ -304,13 +316,7 @@ text {
   overflow-wrap: break-word;
 }
 
-.page-title {
-  text-align: center;
-  padding: 0 10px;
-}
-
 /* Screens >450px */
-
 @media only screen and (min-width: 450px) {
   .container-top {
     height: 70vh;
@@ -327,7 +333,7 @@ text {
     pointer-events: none;
   }
 
-  g:hover .circle {
+  .circle:hover {
     filter: brightness(0.9);
   }
 

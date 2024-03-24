@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,33 +13,25 @@ model Emotions {
   createdAt     DateTime @default(now()) @db.Timestamp(6)
   participantId String
   none          Boolean @default(false)
-  em01          Int?
-  em02          Int?
-  em03          Int?
-  em04          Int?
-  em05          Int?
-  em06          Int?
-  em07          Int?
-  em08          Int?
-  em09          Int?
-  em10          Int?
-  em11          Int?
-  em12          Int?
-  em13          Int?
-  em14          Int?
-  em15          Int?
-  em16          Int?
-  em17          Int?
-  em18          Int?
-  em19          Int?
-  em20          Int?
-  other         Other[]
-}
-
-model Other {
-  id      Int @id @default(autoincrement())
-  name    String
-  rating  Int
-  entry   Emotions @relation(fields: [entryId], references: [id], onDelete: Cascade)
-  entryId Int
+  em01          Int? @db.SmallInt
+  em02          Int? @db.SmallInt
+  em03          Int? @db.SmallInt
+  em04          Int? @db.SmallInt
+  em05          Int? @db.SmallInt
+  em06          Int? @db.SmallInt
+  em07          Int? @db.SmallInt
+  em08          Int? @db.SmallInt
+  em09          Int? @db.SmallInt
+  em10          Int? @db.SmallInt
+  em11          Int? @db.SmallInt
+  em12          Int? @db.SmallInt
+  em13          Int? @db.SmallInt
+  em14          Int? @db.SmallInt
+  em15          Int? @db.SmallInt
+  em16          Int? @db.SmallInt
+  em17          Int? @db.SmallInt
+  em18          Int? @db.SmallInt
+  em19          Int? @db.SmallInt
+  em20          Int? @db.SmallInt
+  other         Json?
 }
