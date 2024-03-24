@@ -41,7 +41,7 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
   };
 
   // Delete selected emotion
-  const handleDelete = () => {
+  const handleDeselect = () => {
     setSelectedItems((current) =>
       current.filter((item) => {
         return item.id != currentItem.id;
@@ -307,7 +307,7 @@ export default function Wheel({ selectedItems, setSelectedItems }) {
                   <>
                     <button
                       className="btn delete select-none"
-                      onClick={handleDelete}
+                      onClick={handleDeselect}
                     >
                       Noņemt
                     </button>

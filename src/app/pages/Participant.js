@@ -1,5 +1,3 @@
-import Input from "../components/Input";
-
 export default function Participant({
   setPage,
   participantId,
@@ -35,7 +33,8 @@ export default function Participant({
     <div className="main">
       <div className="participant-container">
         <p>Ievadiet savu identifikatoru</p>
-        <Input
+        <input
+          className="text-input"
           type="text"
           id="participantId"
           name="participantId"

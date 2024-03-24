@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Input from "./Input";
 import Rate from "./Rate";
 import OtherEmotionList from "./OtherEmotionList";
 
@@ -102,7 +101,8 @@ export default function OtherEmotions({
             <div className="input-name">
               <p>Emocijas nosaukums</p>
             </div>
-            <Input
+            <input
+              className="text-input"
               type="text"
               name="participantId"
               maxLength={30}

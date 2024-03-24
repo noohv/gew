@@ -30,9 +30,7 @@ export async function saveData(participantId, data) {
   const result = await prisma.emotions.create({
     data: {
       participantId: participantId,
-      other: {
-        create: other,
-      },
+      other: other,
       ...rest,
     },
   });
