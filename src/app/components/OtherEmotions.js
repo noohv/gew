@@ -18,15 +18,23 @@ export default function OtherEmotions({
     (item) => item.id == "other"
   )?.emotions;
   const [showInputs, setShowInputs] = useState(!otherEmotions);
+  const MAX_OTHER_COUNT = 10; // Maximum amount of "Other" emotions
 
   useEffect(() => {
     setShowInputs(!otherEmotions || editMode);
   }, [otherEmotions, editMode]);
 
-  const deleteItem = (index) => {
+  /**
+   * Function to delete the selected item.
+   * @param {number} index - The index of the item to be deleted.
+   */
+  const handleItemDelete = (index) => {
+    // Create a copy of otherEmotions array
     const updatedItems = [...otherEmotions];
+    // Remove item at the specified index
     updatedItems.splice(index, 1);
 
+    // If no items left after deletion, remove "other" from selectedItems and clear currentItem
     if (updatedItems.length === 0) {
       setSelectedItems((current) =>
         current.filter((item) => {
@@ -35,6 +43,7 @@ export default function OtherEmotions({
       );
       setCurrentItem();
     } else {
+      // Update otherEmotions and cancel edit mode
       setSelectedItems((prevData) => {
         return prevData.map((emotion) => {
           if (emotion.id === "other") {
@@ -46,11 +55,16 @@ export default function OtherEmotions({
           return emotion;
         });
       });
-      cancelEdit();
+      handleEditCancel();
     }
   };
 
-  const editItem = (index) => {
+  /**
+   * Function to start editing the selected item.
+   * @param {number} index - The index of the item to be edited.
+   */
+  const handleItemEdit = (index) => {
+    // Set edit mode, edit index, current item, rating, and show inputs
     setEditMode(true);
     setEditIndex(index);
     const editData = {
@@ -63,7 +77,11 @@ export default function OtherEmotions({
     setShowInputs(true);
   };
 
-  const saveEdit = () => {
+  /**
+   * Function to save the edited item.
+   */
+  const handleSaveEdit = () => {
+    // Update otherEmotions with edited item, update selectedItems, and cancel edit mode
     const updatedItems = otherEmotions.map((c, i) => {
       if (i === editIndex) {
         return { name: currentItem.value, rating: rating };
@@ -83,10 +101,14 @@ export default function OtherEmotions({
         return emotion;
       });
     });
-    cancelEdit();
+    handleEditCancel();
   };
 
-  const cancelEdit = () => {
+  /**
+   * Function to cancel the edit.
+   */
+  const handleEditCancel = () => {
+    // Reset edit mode, currentItem, rating, and hide inputs
     setEditMode(false);
     setCurrentItem((prev) => ({ id: prev.id, name: prev.name }));
     setRating(undefined);
@@ -115,29 +137,31 @@ export default function OtherEmotions({
 
             <div className="rate-buttons">
               {otherEmotions && (
-                <button className="btn cancel" onClick={cancelEdit}>
+                <button className="btn cancel" onClick={handleEditCancel}>
                   Atcelt
                 </button>
               )}
               <button
                 className="btn"
                 disabled={currentItem?.value && rating ? false : true}
-                onClick={editMode ? saveEdit : handleClick}
+                onClick={editMode ? handleSaveEdit : handleClick}
               >
                 {editMode ? "Rediģēt" : "Pievienot"}
               </button>
             </div>
           </>
         ) : (
-          <button className="btn" onClick={() => setShowInputs(true)}>
-            Pievienot vēl
-          </button>
+          otherEmotions.length < MAX_OTHER_COUNT && (
+            <button className="btn" onClick={() => setShowInputs(true)}>
+              Pievienot vēl
+            </button>
+          )
         )}
         {otherEmotions && (
           <OtherEmotionList
             emotions={otherEmotions}
-            handleDelete={deleteItem}
-            handleEdit={editItem}
+            handleDelete={handleItemDelete}
+            handleEdit={handleItemEdit}
           />
         )}
       </div>

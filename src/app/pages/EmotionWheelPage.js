@@ -11,19 +11,32 @@ export default function EmotionWheelPage({
 }) {
   const [showSave, setShowSave] = useState(true);
 
+  /**
+   * Function to handle save action.
+   * Hides save prompt and saves data if selectedItems is not empty.
+   */
   const handleSave = () => {
+    // Hide save prompt
     setShowSave(false);
+    // Check if selectedItems is not empty
     if (!isEmpty()) {
+      // Asynchronously save data
       const postData = async () => {
-        const response = await saveData(participantId, selectedItems);
+        await saveData(participantId, selectedItems);
       };
+      // Invoke postData and update state after saving
       postData().then(() => {
+        // Clear selectedItems and increment page number after saving
         setSelectedItems([{}]);
         setPage((prev) => prev + 1);
       });
     }
   };
 
+  /**
+   * Function to check if selectedItems is empty.
+   * @returns {boolean} - True if selectedItems is empty, otherwise false.
+   */
   const isEmpty = () => {
     return selectedItems.length > 0 ? false : true;
   };
