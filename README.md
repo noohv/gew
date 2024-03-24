@@ -2,9 +2,9 @@
 
 ## Used technologies
 
-- **NextJS** 💻 - React framework [learn more](https://nextjs.org/)
-- **Supabase** 🔥 - Providing PostgresSQL DB [learn more](https://supabase.com/)
-- **Prisma** 💎 - Database schema controller and ORM [learn more](https://prisma.io/)
+- **NextJS** - React framework [learn more](https://nextjs.org/)
+- **Supabase** - Providing PostgresSQL DB [learn more](https://supabase.com/)
+- **Prisma** - Database schema controller and ORM [learn more](https://prisma.io/)
 
 ## Prerequisites
 
