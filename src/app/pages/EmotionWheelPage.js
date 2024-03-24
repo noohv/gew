@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import clsx from "clsx";
-import Wheel from "../components/Wheel";
+import EmotionActions from "../components/EmotionActions";
+import EmotionWheel from "../components/EmotionWheel";
 import { saveData } from "../actions/actions";
 
 export default function EmotionWheelPage({
@@ -10,6 +11,20 @@ export default function EmotionWheelPage({
   setSelectedItems,
 }) {
   const [showSave, setShowSave] = useState(true);
+  const [currentItem, setCurrentItem] = useState();
+  const [rating, setRating] = useState();
+  const [showRating, setShowRating] = useState(false);
+
+  /**
+   * Function to reset component states.
+   * Clears currentItem, rating, and hides rating UI.
+   */
+  const resetData = () => {
+    // Clear currentItem, rating, and hide rating UI
+    setCurrentItem();
+    setRating();
+    setShowRating(false);
+  };
 
   /**
    * Function to handle save action.
@@ -47,10 +62,30 @@ export default function EmotionWheelPage({
         Lūdzu, atzīmē šā brīža emocijas un to intensitāti skalā no 1 (vāja) līdz
         5 (stipra)!
       </h3>
-      <Wheel
-        selectedItems={selectedItems}
-        setSelectedItems={setSelectedItems}
-      />
+      <div className="emotion-wheel-container">
+        <div className="container-top">
+          <div className="wheel-container">
+            <EmotionWheel
+              selectedItems={selectedItems}
+              setSelectedItems={setSelectedItems}
+              currentItem={currentItem}
+              setCurrentItem={setCurrentItem}
+              setRating={setRating}
+              setShowRating={setShowRating}
+            />
+          </div>
+        </div>
+        <EmotionActions
+          resetData={resetData}
+          rating={rating}
+          setRating={setRating}
+          showRating={showRating}
+          selectedItems={selectedItems}
+          setSelectedItems={setSelectedItems}
+          currentItem={currentItem}
+          setCurrentItem={setCurrentItem}
+        />
+      </div>
 
       <div
         className={clsx("save", {

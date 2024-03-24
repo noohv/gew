@@ -3,7 +3,7 @@ import clsx from "clsx";
 import EmotionCircle from "./EmotionCircle";
 import emotions from "../utils/emotions.js";
 
-export default function WheelComponent({
+export default function EmotionWheel({
   selectedItems,
   setSelectedItems,
   currentItem,

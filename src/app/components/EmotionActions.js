@@ -2,7 +2,7 @@ import React from "react";
 import OtherEmotions from "./OtherEmotions";
 import Rate from "./Rate";
 
-export default function Bottom({
+export default function EmotionActions({
   rating,
   setRating,
   showRating,
