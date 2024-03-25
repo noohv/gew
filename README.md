@@ -8,8 +8,8 @@
 
 ## Prerequisites
 
-[Node.js](https://nodejs.org) latest version installed
-[GitHub](https://github.com/) account
+- [Node.js](https://nodejs.org) latest version installed
+- [GitHub](https://github.com/) account
 
 ## Getting Started
 
@@ -22,6 +22,8 @@ npm install
 ```
 
 ### 2. Create [Supabase](https://supabase.com/) project
+
+Go to Databases -> Connection pooling
 
 ### 3. Create environment file
 
@@ -56,10 +58,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 The easiest way to deploy Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 1. Import the GEW repository from GitHub
 
-### 1. Import the GEW repository
-
-### 2. In Settings -> Environment Variables
+### 2. Go to GEW -> Settings -> Environment Variables
 
 ### 3. Add environment variables or import .env file

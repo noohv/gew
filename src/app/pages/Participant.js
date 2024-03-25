@@ -34,14 +34,10 @@ export default function Participant({
    */
   const validateIdentifier = () => {
     // Regular expression for valid participant identifier format
-    const regex = /^[a-zA-Z]{2}\d{4}$/;
     if (participantId) {
       // Convert participantId to lowercase
       setParticipantId(participantId.toLowerCase());
-      // Check if participantId matches the regex pattern
-      if (participantId.match(regex)) {
-        return true;
-      }
+      if (participantId.length <= 50) return true;
     }
     return false;
   };
@@ -55,7 +51,7 @@ export default function Participant({
           type="text"
           id="participantId"
           name="participantId"
-          maxLength={6}
+          maxLength={50}
           onKeyUp={handleKey}
           onChange={(e) => setParticipantId(e.target.value)}
         />
