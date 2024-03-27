@@ -288,6 +288,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  margin-bottom: 50px;
 }
 
 .other-list button {
