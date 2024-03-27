@@ -12,6 +12,7 @@ model Emotions {
   id            Int @id @default(autoincrement())
   createdAt     DateTime @default(now()) @db.Timestamp(6)
   participantId String
+  surveyData    Json?
   none          Boolean @default(false)
   em01          Int? @db.SmallInt
   em02          Int? @db.SmallInt

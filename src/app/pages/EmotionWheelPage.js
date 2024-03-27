@@ -9,6 +9,7 @@ export default function EmotionWheelPage({
   participantId,
   selectedItems,
   setSelectedItems,
+  surveyData,
 }) {
   const [showSave, setShowSave] = useState(true);
   const [currentItem, setCurrentItem] = useState();
@@ -37,14 +38,28 @@ export default function EmotionWheelPage({
     if (!isEmpty()) {
       // Asynchronously save data
       const postData = async () => {
-        await saveData(participantId, selectedItems);
+        try {
+          const result = await saveData(
+            participantId,
+            surveyData,
+            selectedItems
+          );
+          return result; // Return the result if successful
+        } catch (error) {
+          throw error; // Throw the error if something goes wrong
+        }
       };
       // Invoke postData and update state after saving
-      postData().then(() => {
-        // Clear selectedItems and increment page number after saving
-        setSelectedItems([{}]);
-        setPage((prev) => prev + 1);
-      });
+      postData()
+        .then(() => {
+          // Clear selectedItems and increment page number after saving
+          setSelectedItems([{}]);
+          setPage((prev) => prev + 1);
+        })
+        .catch((reason) => {
+          setShowSave(true);
+          alert("Neizdevās saglabāt!");
+        });
     }
   };
 
