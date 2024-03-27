@@ -5,6 +5,7 @@
 - **NextJS** - React framework [learn more](https://nextjs.org/)
 - **Supabase** - Providing PostgresSQL DB [learn more](https://supabase.com/)
 - **Prisma** - Database schema controller and ORM [learn more](https://prisma.io/)
+- **SurveyJS** - Library for making surveys [learn more](https://surveyjs.io/)
 
 ## Prerequisites
 
