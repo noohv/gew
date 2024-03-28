@@ -30,7 +30,7 @@ export async function saveData(participantId, surveyData, data) {
     // Convert emotion data to savable format
     const { other, ...rest } = await convertToNewFormat(data);
 
-    const result = await prisma.emotions.create({
+    const result = await prisma.responseData.create({
       data: {
         participantId: participantId,
         other: other,
