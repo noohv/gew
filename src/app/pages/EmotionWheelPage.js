@@ -38,28 +38,21 @@ export default function EmotionWheelPage({
     if (!isEmpty()) {
       // Asynchronously save data
       const postData = async () => {
-        try {
-          const result = await saveData(
-            participantId,
-            surveyData,
-            selectedItems
-          );
-          return result; // Return the result if successful
-        } catch (error) {
-          throw error; // Throw the error if something goes wrong
-        }
+        const result = await saveData(participantId, surveyData, selectedItems);
+        return result; // Return the result if successful
       };
       // Invoke postData and update state after saving
-      postData()
-        .then(() => {
+      postData().then((result) => {
+        setShowSave(false);
+        if (result.success) {
           // Clear selectedItems and increment page number after saving
           setSelectedItems([{}]);
           setPage((prev) => prev + 1);
-        })
-        .catch((reason) => {
-          setShowSave(true);
+        } else {
           alert("Neizdevās saglabāt!");
-        });
+          setShowSave(true);
+        }
+      });
     }
   };
 
