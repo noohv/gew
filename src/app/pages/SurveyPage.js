@@ -6,7 +6,7 @@ import { Survey } from "survey-react-ui";
 const surveyJson = {
   pages: [
     {
-      name: "page1",
+      name: "page2",
       title: "Aptauja",
       description: "Lūdzu aizpildiet informāciju par sevi!",
       elements: [
@@ -121,6 +121,148 @@ const surveyJson = {
             default: "Cits",
           },
         },
+        {
+          name: "roka",
+          title: "Jūs esat:",
+          type: "radiogroup",
+          isRequired: true,
+          choices: [
+            {
+              value: "right_handed",
+              text: "Labrocis",
+            },
+            {
+              value: "left_handed",
+              text: "Kreilis",
+            },
+          ],
+        },
+        {
+          type: "checkbox",
+          name: "hobiji",
+          title: "Kādi ir jūsu hobiji/brīvā laika nodarbošanās?",
+          description: "Iespējamas vairākas atbildes",
+          isRequired: true,
+          choices: [
+            {
+              value: "speles",
+              text: "Videospēles, datorspēles",
+            },
+            {
+              value: "ara_aktivitates",
+              text: "Āra aktivitātes (makšķerēšana, medības, pārgājieni, laivošana u.c)",
+            },
+            {
+              value: "sports",
+              text: "Sports (sporta spēles, skriešana, riteņbraukšana u.c.)",
+            },
+            {
+              value: "galda_speles",
+              text: "Galda, āra spēles, puzles u.c.",
+            },
+            {
+              value: "dejosana",
+              text: "Dejošana",
+            },
+            {
+              value: "muzicesana",
+              text: "Muzicēšana (spēlēt mūzikas instrumentus)",
+            },
+            {
+              value: "vizuala_maksla",
+              text: "Vizuālā māksla (zīmēšana, gleznošana, tēlniecība u.c)",
+            },
+          ],
+          showOtherItem: true,
+          otherPlaceholder: {
+            default: "",
+          },
+          otherText: {
+            default: "Cits",
+          },
+        },
+        {
+          visibleIf: "{hobiji} contains 'speles'",
+          type: "radiogroup",
+          name: "speles",
+          title: "Cik bieži spēlējat datorspēles?",
+          isRequired: true,
+          choices: [
+            {
+              value: "katru_dienu",
+              text: "Katru dienu",
+            },
+            {
+              value: "dazas_reizes_nedela",
+              text: "Dažas reizes nedēļā",
+            },
+            {
+              value: "dazas_reizes_menesi",
+              text: "Dažas reizes mēnesī",
+            },
+          ],
+          showOtherItem: true,
+          otherPlaceholder: {
+            default: "",
+          },
+          otherText: {
+            default: "Cits",
+          },
+        },
+
+        {
+          visibleIf: "{hobiji} contains 'speles'",
+          type: "checkbox",
+          name: "speles_veidi",
+          title:
+            'Kāda veida datorspēles Jūs spēlējat? (Ja neviens no žanriem neatbilst, izvēlaties opciju "Cits" un norādiet biežāk spēlētāko spēļu nosaukumus)',
+          isRequired: true,
+          choices: [
+            {
+              value: "sausana",
+              text: "Šāvēji, kaujas spēles",
+            },
+            {
+              value: "simulatori",
+              text: "Simulatori (vadītāji)",
+            },
+            {
+              value: "strategijas",
+              text: "Stratēģijas",
+            },
+            {
+              value: "piedzivojumi",
+              text: "Piedzīvojumi",
+            },
+            {
+              value: "muzikas",
+              text: "Mūzikas spēles (ritma spēles)",
+            },
+            {
+              value: "lomu",
+              text: "Lomu spēles",
+            },
+            {
+              value: "logiskas",
+              text: "Loģiskās spēles",
+            },
+            {
+              value: "galda",
+              text: "Galda spēles",
+            },
+            {
+              value: "teksta",
+              text: "Teksta spēles",
+            },
+          ],
+          showOtherItem: true,
+          otherPlaceholder: {
+            default: "",
+          },
+          otherText: {
+            default: "Cits",
+          },
+        },
       ],
     },
   ],
@@ -128,6 +270,7 @@ const surveyJson = {
   showQuestionNumbers: "off",
   showPrevButton: false,
   firstPageIsStarted: true,
+  startSurveyText: "Sākt aptauju",
 };
 
 export default function SurveyPage({ setPage, setSurveyData }) {

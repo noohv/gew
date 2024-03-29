@@ -45,7 +45,16 @@ export default function Participant({
   return (
     <div className="main">
       <div className="participant-container">
-        <p>Ievadiet savu identifikatoru</p>
+        <p>
+          Labdien! <br />
+          <br />
+          Esmu Latvijas Universitātes Datorzinātņu 4. kursa students Valters
+          Hūns un bakalaura darba ietvaros veicu pētījumu par vizuālo uzmanību
+          un cilvēka reakcijas laiku. Dalība kopumā aizņems aptuveni 5-10
+          minūtes. <br />
+          <br />
+          Ievadiet savu identifikatoru
+        </p>
         <input
           className="text-input"
           type="text"
