@@ -13,11 +13,12 @@
 - [GitHub](https://github.com/) account
 - [Git](https://git-scm.com/download/win) file versioning system
 - [GitHub Desktop](https://desktop.github.com/) - **optional**
+- [Visual Studio Code](https://code.visualstudio.com/) - code editor
 
 ## How to setup the project
 
 ### Fork the repository
-![image](https://github.com/noohv/gew/assets/56311522/1a6ff466-8380-4f0e-b704-b57fcc0c99c3)
+![Untitled](https://github.com/noohv/gew/assets/56311522/48558ce7-9576-45db-ba56-97fa66cc1551)
 
 
 
@@ -52,10 +53,10 @@ npm install
 2. You can find connection parameters in Project Settings -> Database
 
 ### Create environment file
-1. Inside project create file `.env`
+1. Copy `.env.example` file and rename to `.env`
 2. Copy `Connection string` from Supabase
-3. Replace [YOUR-PASSWORD] with the password you entered when creating project
-4. 
+3. In `.env` for DIRECT_URL paste the string and replace [YOUR-PASSWORD]
+4. For DATABASE_URL paste the string, replace [YOUR-PASSWORD] and change the end to `6543/postgres?pgbouncer=true&connection_limit=1` instead of `5432/postgres`
 
 ```bash
 # example
