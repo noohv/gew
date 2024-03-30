@@ -11,56 +11,82 @@
 
 - [Node.js](https://nodejs.org) latest version installed
 - [GitHub](https://github.com/) account
+- [Git](https://git-scm.com/download/win) file versioning system
+- [GitHub Desktop](https://desktop.github.com/) - **optional**
 
-## Getting Started
+## How to setup the project
 
-### 1. Clone the repository and install dependencies
+### Fork the repository
+![image](https://github.com/noohv/gew/assets/56311522/1a6ff466-8380-4f0e-b704-b57fcc0c99c3)
+
+
+
+### Clone the repository and install dependencies
+
+1. Open `cmd`
+2. Navigate to folder where to save the local project
+```
+cd PATH_TO_PROJECT
+```
+  For example
+```
+cd desktop
+```
+
+3. Clone the project (you can find the link under `Code` button)
+
+![image](https://github.com/noohv/gew/assets/56311522/8a174bf0-138c-4545-960a-3cd18a92ccd1)
 
 ```
-git clone https://github.com/noohv/gew.git
-cd gew
+git clone https://github.com/<your-username>/<repository-name>.git
+cd <repository-name>
+```
+
+4. Install dependencies
+```
 npm install
 ```
 
-### 2. Create [Supabase](https://supabase.com/) project
+### Setup [Supabase](https://supabase.com/)
+1. Create new project
+2. You can find connection parameters in Project Settings -> Database
 
-Go to Databases -> Connection pooling
-
-### 3. Create environment file
+### Create environment file
+1. Inside project create file `.env`
+2. Copy `Connection string` from Supabase
+3. Replace [YOUR-PASSWORD] with the password you entered when creating project
+4. 
 
 ```bash
-# .env
-
-# Prisma DB URLs - can be found in Databases > Connection pooling
-# Ensure you set the port to 6543 on this page too!
-DATABASE_URL="postgres://postgres:__DATABASE_PASSWORD__.__PROJECT_ID__.supabase.co:6543/postgres?pgbouncer=true&connection_limit=1"
-DIRECT_URL="postgres://postgres:__DATABASE_PASSWORD__.__PROJECT_ID__.supabase.co:5432/postgres"
+# example
+DATABASE_URL="postgres://[DATABASE-USER]:[YOUR-PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=1"
+DIRECT_URL="postgres://[DATABASE-USER]:[YOUR-PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:5432/postgres"
 ```
 
-### 4. Run Prisma to perform database migration
+### Create database
 
+1. In your project folder run:
 ```bash
 npx prisma migrate dev --name init
 ```
 
-```bash
-npx prisma generate
-```
 
-To run the development server:
-
+### To run the development server (local):
+1. In your project folder run:
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Deploy on Vercel
+1. Add new project
+2. Import the repository from GitHub
 
-The easiest way to deploy Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![image](https://github.com/noohv/gew/assets/56311522/d9b1bdc8-6810-4d89-9489-b4e3fd59c6c2)
 
-### 1. Import the GEW repository from GitHub
+3. Create Environment Variables (replace _YOUR_DIRECT_URL_ and _YOUR_DATABASE_URL_ with your values)
 
-### 2. Go to GEW -> Settings -> Environment Variables
+![image](https://github.com/noohv/gew/assets/56311522/963ea3bf-c597-45eb-96b4-bb6c18bdfaed)
 
-### 3. Add environment variables or import .env file
+4. Press **Deploy**
