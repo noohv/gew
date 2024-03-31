@@ -12,15 +12,13 @@
 - [Node.js](https://nodejs.org) latest version installed
 - [GitHub](https://github.com/) account
 - [Git](https://git-scm.com/download/win) file versioning system
-- [GitHub Desktop](https://desktop.github.com/) - **optional**
 - [Visual Studio Code](https://code.visualstudio.com/) - code editor
 
 ## How to setup the project
 
 ### Fork the repository
+To get a copy of the code on your GitHub profile
 ![Untitled](https://github.com/noohv/gew/assets/56311522/48558ce7-9576-45db-ba56-97fa66cc1551)
-
-
 
 ### Clone the repository and install dependencies
 
