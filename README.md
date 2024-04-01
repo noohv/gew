@@ -17,7 +17,7 @@
 ## How to setup the project
 
 ### Fork the repository
-To get a copy of the code on your GitHub profile press the `Fork` button
+To get a copy of the code on your GitHub profile press  `Fork` -> `Create fork`
 ![Untitled](https://github.com/noohv/gew/assets/56311522/48558ce7-9576-45db-ba56-97fa66cc1551)
 
 
