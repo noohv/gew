@@ -17,7 +17,7 @@
 ## How to setup the project
 
 ### Fork the repository
-To get a copy of the code on your GitHub profile
+To get a copy of the code on your GitHub profile press the `Fork` button
 ![Untitled](https://github.com/noohv/gew/assets/56311522/48558ce7-9576-45db-ba56-97fa66cc1551)
 
 
@@ -35,7 +35,7 @@ cd PATH_TO_PROJECT
 cd desktop
 ```
 
-3. Clone the project (you can find the link under `Code` button)
+3. Clone the project (you can find the link in your repository under `Code` button)
 
 ![image](https://github.com/noohv/gew/assets/56311522/8a174bf0-138c-4545-960a-3cd18a92ccd1)
 
