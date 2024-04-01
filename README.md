@@ -25,7 +25,7 @@ To get a copy of the code on your GitHub profile press the `Fork` button
 
 ### Clone the repository and install dependencies
 
-1. Open `cmd` or through Visual Studio Code terminal
+1. Open `cmd` or `Visual Studio Code -> Terminal`
 2. Navigate to folder where to save the local project
 ```
 cd PATH_TO_PROJECT
