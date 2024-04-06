@@ -25,7 +25,10 @@ export default function Rate({ numOptions = 5, rating, handleChange }) {
   return (
     <div className="rating-section">
       <div className="input-name">
-        <p>Novērtē emocijas intensitāti no 1-'vāja' līdz 5-'stipra'</p>
+        <p>
+          Novērtē emocijas intensitāti no 1-&apos;vāja&apos; līdz
+          5-&apos;stipra&apos;
+        </p>
       </div>
       <div className="rating-bar-container">{options}</div>
       <div className="rating-intensity">
