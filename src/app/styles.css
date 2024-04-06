@@ -1,5 +1,5 @@
 :root {
-  --main-color: #19b394;
+  --main-color: #888888;
   --white: #fff;
   --black: #000000;
   --red: #d11a2a;
@@ -43,6 +43,12 @@
   align-self: center;
 }
 
+.explanation {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  padding-bottom: 10px;
+}
+
 .page-title {
   text-align: center;
   padding: 0 10px;
@@ -67,7 +73,6 @@
   border-radius: 50%;
   background-color: var(--default);
   color: var(--black);
-  font-weight: bold;
 }
 
 .btn svg {

@@ -2,18 +2,20 @@
 import React, { useState } from "react";
 import Participant from "./pages/Participant";
 import EmotionWheelPage from "./pages/EmotionWheelPage";
-import FinalPage from "./pages/FinalPage";
 import SurveyPage from "./pages/SurveyPage";
 import "./styles.css";
+import Explanation from "./pages/Explanation";
+import { saveData } from "./actions/actions";
 
 export default function Home() {
   const [page, setPage] = useState(0);
-  const [participantId, setParticipantId] = useState();
+  const [participantId, setParticipantId] = useState("");
   const [selectedItems, setSelectedItems] = useState([]);
-  const [surveyData, setSurveyData] = useState();
 
-  // True to show survey, false to hide it
-  const showSurvey = true;
+  const postData = async (data) => {
+    const result = await saveData(participantId, data, selectedItems);
+    return result; // Return the result
+  };
 
   const conditionalComponent = () => {
     switch (page) {
@@ -27,12 +29,8 @@ export default function Home() {
         );
 
       case 1:
-        if (showSurvey)
-          return <SurveyPage setSurveyData={setSurveyData} setPage={setPage} />;
-        else {
-          setPage((prev) => prev + 1);
-          return;
-        }
+        return <Explanation setPage={setPage} />;
+
       case 2:
         return (
           <EmotionWheelPage
@@ -40,11 +38,12 @@ export default function Home() {
             setSelectedItems={setSelectedItems}
             participantId={participantId}
             setPage={setPage}
-            surveyData={surveyData}
           />
         );
+
       case 3:
-        return <FinalPage />;
+        return <SurveyPage setPage={setPage} postData={postData} />;
+
       default:
         return (
           <Participant

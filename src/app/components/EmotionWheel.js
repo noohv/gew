@@ -162,7 +162,7 @@ export default function EmotionWheel({
         className={clsx({
           ["selected current"]: selectedItems.find((a) => a.id === "none"),
         })}
-        item={{ id: "none", name: "Neviens" }}
+        item={{ id: "none", name: "Neviena" }}
         cx={40}
         cy={50}
         isSelected={selectedItems.find((a) => a.id === currentItem?.id)}
@@ -182,7 +182,7 @@ export default function EmotionWheel({
         fill="black"
         fontSize="18"
       >
-        Neviens
+        Neviena
       </text>
 
       <text

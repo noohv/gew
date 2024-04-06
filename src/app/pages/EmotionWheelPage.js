@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import EmotionActions from "../components/EmotionActions";
 import EmotionWheel from "../components/EmotionWheel";
-import { saveData } from "../actions/actions";
 
 export default function EmotionWheelPage({
   setPage,
-  participantId,
   selectedItems,
   setSelectedItems,
-  surveyData,
 }) {
   const [showSave, setShowSave] = useState(true);
   const [currentItem, setCurrentItem] = useState();
@@ -28,35 +25,6 @@ export default function EmotionWheelPage({
   };
 
   /**
-   * Function to handle save action.
-   * Hides save prompt and saves data if selectedItems is not empty.
-   */
-  const handleSave = () => {
-    // Hide save prompt
-    setShowSave(false);
-    // Check if selectedItems is not empty
-    if (!isEmpty()) {
-      // Asynchronously save data
-      const postData = async () => {
-        const result = await saveData(participantId, surveyData, selectedItems);
-        return result; // Return the result if successful
-      };
-      // Invoke postData and update state after saving
-      postData().then((result) => {
-        setShowSave(false);
-        if (result.success) {
-          // Clear selectedItems and increment page number after saving
-          setSelectedItems([{}]);
-          setPage((prev) => prev + 1);
-        } else {
-          alert("Neizdevās saglabāt!");
-          setShowSave(true);
-        }
-      });
-    }
-  };
-
-  /**
    * Function to check if selectedItems is empty.
    * @returns {boolean} - True if selectedItems is empty, otherwise false.
    */
@@ -66,10 +34,7 @@ export default function EmotionWheelPage({
 
   return (
     <div className="container">
-      <h3 className="page-title">
-        Lūdzu, atzīmē šā brīža emocijas un to intensitāti skalā no 1 (vāja) līdz
-        5 (stipra)!
-      </h3>
+      <h3 className="page-title">Lūdzu, atzīmē šī brīža emocijas!</h3>
       <div className="emotion-wheel-container">
         <div className="container-top">
           <div className="wheel-container">
@@ -100,7 +65,11 @@ export default function EmotionWheelPage({
           ["show"]: !isEmpty() && showSave,
         })}
       >
-        <button className="btn" disabled={isEmpty()} onClick={handleSave}>
+        <button
+          className="btn"
+          disabled={isEmpty()}
+          onClick={() => setPage((prev) => prev + 1)}
+        >
           Iesniegt
         </button>
       </div>

@@ -1,141 +1,118 @@
+"use client";
 import React from "react";
 import "survey-core/defaultV2.min.css";
 import { Model } from "survey-core";
 import { Survey } from "survey-react-ui";
+import { themeJson } from "../utils/survey_theme";
 
 const surveyJson = {
   pages: [
     {
       name: "page1",
-      title: "Aptauja",
-      description: "Lūdzu aizpildiet informāciju par sevi!",
+      title: "Lūdzu sniedziet atbildes par sevi!",
       elements: [
         {
-          name: "dzimums",
-          title: "Jūsu dzimums:",
+          name: "response_time",
+          title: "Emocijas atzīmēju:",
           isRequired: true,
           type: "radiogroup",
-          choices: ["Vīrietis", "Sieviete", "Cits"],
+          choices: [
+            "Pirms treniņa",
+            "Pēc treniņa",
+            "Pirms sacensībām",
+            "Pēc sacensībām",
+          ],
+          showOtherItem: true,
+          otherPlaceholder: {
+            default: "",
+          },
+          otherText: {
+            default: "Cits",
+          },
         },
         {
-          name: "vecums",
-          title: "Jūsu vecums:",
+          visibleIf:
+            "{response_time} = 'Pēc treniņa' or {response_time} = 'Pēc sacensībām'",
+          name: "activity_intensity",
+          title: "Kāda bija aktivitātes intensitāte?",
+          type: "radiogroup",
           isRequired: true,
+          choices: ["Augsta", "Vidēja", "Zema"],
+        },
+        {
+          visibleIf:
+            "{response_time} = 'Pēc treniņa' or {response_time} = 'Pēc sacensībām'",
+          name: "activity_duration",
+          title: "Cik ilgi veicāt aktivitāti?",
+          description: "Laiku norādīt minūtēs",
           type: "text",
+          inputType: "number",
+          isRequired: true,
         },
         {
-          name: "izglitibas_joma",
-          title: "Jūsu izglītības joma",
-          type: "radiogroup",
+          visibleIf:
+            "{response_time} = 'Pēc treniņa' or {response_time} = 'Pēc sacensībām'",
+          name: "time_since_activity",
+          title: "Cik ilgs laiks pagājis kopš aktivitātes veikšanas?",
           isRequired: true,
-          choices: [
-            {
-              value: "skolens",
-              text: "Skolēns",
-            },
-            {
-              value: "socialas_zinatnes",
-              text: "Sociālās zinātnes",
-            },
-            {
-              value: "dabas_zinatnes",
-              text: "Dabas zinātnes",
-            },
-            {
-              value: "inzenierzinatnes",
-              text: "Inženierzinātnes",
-            },
-            {
-              value: "humanitaras",
-              text: "Humanitārās zinātnes",
-            },
-            {
-              value: "veselibas_aprupe",
-              text: "Veselības aprūpe",
-            },
-            {
-              value: "pakalpojumi",
-              text: "Pakalpojumi",
-            },
-            {
-              value: "izglitiba",
-              text: "Izglītība",
-            },
-            {
-              value: "maksla",
-              text: "Māksla",
-            },
-          ],
+          type: "radiogroup",
+          choices: ["Līdz 30 min", "30 min - 2h", "2 - 24h"],
           showOtherItem: true,
           otherPlaceholder: {
             default: "",
           },
           otherText: {
-            default: "Cits",
+            default: "Cits laiks",
           },
         },
         {
-          name: "nodarbosanas",
-          title: "Jūsu nodarbošanās",
-          type: "radiogroup",
+          visibleIf:
+            "{response_time} = 'Pēc treniņa' or {response_time} = 'Pēc sacensībām'",
+          type: "rating",
+          name: "activity_result_rating",
+          title: "Kā novērtētu aktivitātē sasniegto rezultātu?",
           isRequired: true,
-          choices: [
-            {
-              value: "vaditajs",
-              text: "Augstākā vai vidējā līmeņa vadītājs",
-            },
-            {
-              value: "specialists",
-              text: "Speciālists, ierēdnis",
-            },
-            {
-              value: "stradnieks",
-              text: "Strādnieks, strādā fizisku darbu",
-            },
-            {
-              value: "zemnieks",
-              text: "Zemnieks (ir sava zemnieku saimniecība)",
-            },
-            {
-              value: "uznemejs",
-              text: "Ir savs uzņēmums, individuālais darbs",
-            },
-            {
-              value: "students",
-              text: "Skolēns, students",
-            },
-            {
-              value: "majsaimniece",
-              text: "Mājsaimniece (-ks), bērna kopšanas atvaļinājums",
-            },
-            {
-              value: "bezdarbnieks",
-              text: "Bezdarbnieks",
-            },
-          ],
-          showOtherItem: true,
-          otherPlaceholder: {
-            default: "",
-          },
-          otherText: {
-            default: "Cits",
-          },
+          minRateDescription: "Neveiksmīgs",
+          maxRateDescription: "Veiksmīgs",
+          rateCount: 5,
+          rateMax: 5,
+          displayMode: "buttons",
+          rateDescriptionLocation: "bottom",
         },
       ],
     },
   ],
-  completeText: "Turpināt",
+  completeText: "Iesniegt",
+  completedHtml: "Paldies par dalību!",
   showQuestionNumbers: "off",
   showPrevButton: false,
   firstPageIsStarted: true,
 };
 
-export default function SurveyPage({ setPage, setSurveyData }) {
+const customCss = {
+  completedPage: "main",
+};
+
+export default function SurveyPage({ setPage, postData }) {
   const survey = new Model(surveyJson);
+  survey.applyTheme(themeJson);
+  survey.css = customCss;
+
   survey.onComplete.add((sender, options) => {
-    sender.showCompletedPage = false;
-    setPage((prev) => prev + 1);
-    setSurveyData(sender.data);
+    options.showSaveInProgress("Saglabā...");
+    postData(sender.data).then((result) => {
+      if (result.success) {
+        options.showSaveSuccess("Saglabāts!");
+      } else {
+        options.showSaveError("Neizdevās saglabāt!");
+      }
+    });
+  });
+
+  survey.onErrorCustomText.add(function (sender, options) {
+    if (options.name == "required") {
+      options.text = "Atbilde ir obligāta!";
+    }
   });
 
   return <Survey model={survey} />;
