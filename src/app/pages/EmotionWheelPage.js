@@ -70,7 +70,7 @@ export default function EmotionWheelPage({
           disabled={isEmpty()}
           onClick={() => setPage((prev) => prev + 1)}
         >
-          Iesniegt
+          Tālāk
         </button>
       </div>
     </div>
