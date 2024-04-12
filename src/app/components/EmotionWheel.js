@@ -2,6 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import EmotionCircle from "./EmotionCircle";
 import emotions from "../utils/emotions.js";
+import { useTranslations } from "next-intl";
 
 export default function EmotionWheel({
   selectedItems,
@@ -11,6 +12,8 @@ export default function EmotionWheel({
   setRating,
   setShowRating,
 }) {
+  const t = useTranslations("Index");
+
   /**
    * Function to handle click events on wheel elements.
    * @param {Object} emotion - The emotion object corresponding to the clicked wheel element.
@@ -151,7 +154,7 @@ export default function EmotionWheel({
         fill="black"
         fontSize="18"
       >
-        {emotion.name}
+        {t(emotion.id)}
       </text>
     );
   });
@@ -182,7 +185,7 @@ export default function EmotionWheel({
         fill="black"
         fontSize="18"
       >
-        Neviens
+        {t("none")}
       </text>
 
       <text
@@ -193,7 +196,7 @@ export default function EmotionWheel({
         x="60%"
         y="60%"
       >
-        {`Skaits: ${
+        {`${t("count")} ${
           selectedItems.find((a) => a.id === "other")?.emotions.length || 0
         }`}
       </text>
@@ -226,7 +229,7 @@ export default function EmotionWheel({
         fill="black"
         fontSize="18"
       >
-        Cits
+        {t("other")}
       </text>
 
       <g id="wheel-circles">{wheelItems}</g>

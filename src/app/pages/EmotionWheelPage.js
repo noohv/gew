@@ -3,6 +3,7 @@ import clsx from "clsx";
 import EmotionActions from "../components/EmotionActions";
 import EmotionWheel from "../components/EmotionWheel";
 import { saveData } from "../actions/actions";
+import { useTranslations } from "next-intl";
 
 export default function EmotionWheelPage({
   setPage,
@@ -11,6 +12,7 @@ export default function EmotionWheelPage({
   setSelectedItems,
   surveyData,
 }) {
+  const t = useTranslations("Index");
   const [showSave, setShowSave] = useState(true);
   const [currentItem, setCurrentItem] = useState();
   const [rating, setRating] = useState();
@@ -66,10 +68,7 @@ export default function EmotionWheelPage({
 
   return (
     <div className="container">
-      <h3 className="page-title">
-        Lūdzu, atzīmē šā brīža emocijas un to intensitāti skalā no 1 (vāja) līdz
-        5 (stipra)!
-      </h3>
+      <h3 className="page-title">{t("tuto")}</h3>
       <div className="emotion-wheel-container">
         <div className="container-top">
           <div className="wheel-container">
@@ -101,7 +100,7 @@ export default function EmotionWheelPage({
         })}
       >
         <button className="btn" disabled={isEmpty()} onClick={handleSave}>
-          Iesniegt
+          {t("save")}
         </button>
       </div>
     </div>

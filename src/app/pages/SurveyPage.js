@@ -2,278 +2,276 @@ import React from "react";
 import "survey-core/defaultV2.min.css";
 import { Model } from "survey-core";
 import { Survey } from "survey-react-ui";
-
-const surveyJson = {
-  pages: [
-    {
-      name: "page2",
-      title: "Aptauja",
-      description: "Lūdzu aizpildiet informāciju par sevi!",
-      elements: [
-        {
-          name: "dzimums",
-          title: "Jūsu dzimums:",
-          isRequired: true,
-          type: "radiogroup",
-          choices: ["Vīrietis", "Sieviete", "Cits"],
-        },
-        {
-          name: "vecums",
-          title: "Jūsu vecums:",
-          isRequired: true,
-          type: "text",
-        },
-        {
-          name: "izglitibas_joma",
-          title: "Jūsu izglītības joma",
-          type: "radiogroup",
-          isRequired: true,
-          choices: [
-            {
-              value: "skolens",
-              text: "Skolēns",
-            },
-            {
-              value: "socialas_zinatnes",
-              text: "Sociālās zinātnes",
-            },
-            {
-              value: "dabas_zinatnes",
-              text: "Dabas zinātnes",
-            },
-            {
-              value: "inzenierzinatnes",
-              text: "Inženierzinātnes",
-            },
-            {
-              value: "humanitaras",
-              text: "Humanitārās zinātnes",
-            },
-            {
-              value: "veselibas_aprupe",
-              text: "Veselības aprūpe",
-            },
-            {
-              value: "pakalpojumi",
-              text: "Pakalpojumi",
-            },
-            {
-              value: "izglitiba",
-              text: "Izglītība",
-            },
-            {
-              value: "maksla",
-              text: "Māksla",
-            },
-          ],
-          showOtherItem: true,
-          otherPlaceholder: {
-            default: "",
-          },
-          otherText: {
-            default: "Cits",
-          },
-        },
-        {
-          name: "nodarbosanas",
-          title: "Jūsu nodarbošanās",
-          type: "radiogroup",
-          isRequired: true,
-          choices: [
-            {
-              value: "vaditajs",
-              text: "Augstākā vai vidējā līmeņa vadītājs",
-            },
-            {
-              value: "specialists",
-              text: "Speciālists, ierēdnis",
-            },
-            {
-              value: "stradnieks",
-              text: "Strādnieks, strādā fizisku darbu",
-            },
-            {
-              value: "zemnieks",
-              text: "Zemnieks (ir sava zemnieku saimniecība)",
-            },
-            {
-              value: "uznemejs",
-              text: "Ir savs uzņēmums, individuālais darbs",
-            },
-            {
-              value: "students",
-              text: "Skolēns, students",
-            },
-            {
-              value: "majsaimniece",
-              text: "Mājsaimniece (-ks), bērna kopšanas atvaļinājums",
-            },
-            {
-              value: "bezdarbnieks",
-              text: "Bezdarbnieks",
-            },
-          ],
-          showOtherItem: true,
-          otherPlaceholder: {
-            default: "",
-          },
-          otherText: {
-            default: "Cits",
-          },
-        },
-        {
-          name: "roka",
-          title: "Jūs esat:",
-          type: "radiogroup",
-          isRequired: true,
-          choices: [
-            {
-              value: "right_handed",
-              text: "Labrocis",
-            },
-            {
-              value: "left_handed",
-              text: "Kreilis",
-            },
-          ],
-        },
-        {
-          type: "checkbox",
-          name: "hobiji",
-          title: "Kādi ir jūsu hobiji/brīvā laika nodarbošanās?",
-          description: "Iespējamas vairākas atbildes",
-          isRequired: true,
-          choices: [
-            {
-              value: "speles",
-              text: "Videospēles, datorspēles",
-            },
-            {
-              value: "ara_aktivitates",
-              text: "Āra aktivitātes (makšķerēšana, medības, pārgājieni, laivošana u.c)",
-            },
-            {
-              value: "sports",
-              text: "Sports (sporta spēles, skriešana, riteņbraukšana u.c.)",
-            },
-            {
-              value: "galda_speles",
-              text: "Galda, āra spēles, puzles u.c.",
-            },
-            {
-              value: "dejosana",
-              text: "Dejošana",
-            },
-            {
-              value: "muzicesana",
-              text: "Muzicēšana (spēlēt mūzikas instrumentus)",
-            },
-            {
-              value: "vizuala_maksla",
-              text: "Vizuālā māksla (zīmēšana, gleznošana, tēlniecība u.c)",
-            },
-          ],
-          showOtherItem: true,
-          otherPlaceholder: {
-            default: "",
-          },
-          otherText: {
-            default: "Cits",
-          },
-        },
-        {
-          visibleIf: "{hobiji} contains 'speles'",
-          type: "radiogroup",
-          name: "speles",
-          title: "Cik bieži spēlējat datorspēles?",
-          isRequired: true,
-          choices: [
-            {
-              value: "katru_dienu",
-              text: "Katru dienu",
-            },
-            {
-              value: "dazas_reizes_nedela",
-              text: "Dažas reizes nedēļā",
-            },
-            {
-              value: "dazas_reizes_menesi",
-              text: "Dažas reizes mēnesī",
-            },
-          ],
-          showOtherItem: true,
-          otherPlaceholder: {
-            default: "",
-          },
-          otherText: {
-            default: "Cits",
-          },
-        },
-
-        {
-          visibleIf: "{hobiji} contains 'speles'",
-          type: "checkbox",
-          name: "speles_veidi",
-          title:
-            'Kāda veida datorspēles Jūs spēlējat? (Ja neviens no žanriem neatbilst, izvēlaties opciju "Cits" un norādiet biežāk spēlētāko spēļu nosaukumus)',
-          isRequired: true,
-          choices: [
-            {
-              value: "sausana",
-              text: "Šāvēji, kaujas spēles",
-            },
-            {
-              value: "simulatori",
-              text: "Simulatori (vadītāji)",
-            },
-            {
-              value: "strategijas",
-              text: "Stratēģijas",
-            },
-            {
-              value: "piedzivojumi",
-              text: "Piedzīvojumi",
-            },
-            {
-              value: "muzikas",
-              text: "Mūzikas spēles (ritma spēles)",
-            },
-            {
-              value: "lomu",
-              text: "Lomu spēles",
-            },
-            {
-              value: "logiskas",
-              text: "Loģiskās spēles",
-            },
-            {
-              value: "galda",
-              text: "Galda spēles",
-            },
-            {
-              value: "teksta",
-              text: "Teksta spēles",
-            },
-          ],
-          showOtherItem: true,
-          otherPlaceholder: {
-            default: "",
-          },
-          otherText: {
-            default: "Cits",
-          },
-        },
-      ],
-    },
-  ],
-  completeText: "Turpināt",
-  showQuestionNumbers: "off",
-  showPrevButton: false,
-  firstPageIsStarted: true,
-  startSurveyText: "Sākt aptauju",
-};
+import { useTranslations } from "next-intl";
 
 export default function SurveyPage({ setPage, setSurveyData }) {
+  const t = useTranslations("Survey");
+
+  const surveyJson = {
+    pages: [
+      {
+        name: "page2",
+        title: t("survey-description"),
+        elements: [
+          {
+            name: "dzimums",
+            title: t("gender"),
+            isRequired: true,
+            type: "radiogroup",
+            choices: [t("male"), t("female"), t("other")],
+          },
+          {
+            name: "vecums",
+            title: t("age"),
+            isRequired: true,
+            type: "text",
+            inputType: "number",
+          },
+          {
+            name: "izglitibas_joma",
+            title: t("study-field"),
+            type: "radiogroup",
+            isRequired: true,
+            choices: [
+              {
+                value: "socialas_zinatnes",
+                text: t("social-science"),
+              },
+              {
+                value: "dabas_zinatnes",
+                text: t("natural-science"),
+              },
+              {
+                value: "inzenierzinatnes",
+                text: t("engineering"),
+              },
+              {
+                value: "humanitaras",
+                text: t("humanities"),
+              },
+              {
+                value: "veselibas_aprupe",
+                text: t("health-care"),
+              },
+              {
+                value: "pakalpojumi",
+                text: t("services"),
+              },
+              {
+                value: "izglitiba",
+                text: t("education"),
+              },
+              {
+                value: "maksla",
+                text: t("art"),
+              },
+            ],
+            showOtherItem: true,
+            otherPlaceholder: {
+              default: "",
+            },
+            otherText: {
+              default: t("other"),
+            },
+          },
+          {
+            name: "nodarbosanas",
+            title: t("occupation"),
+            type: "radiogroup",
+            isRequired: true,
+            choices: [
+              {
+                value: "vaditajs",
+                text: t("manager"),
+              },
+              {
+                value: "specialists",
+                text: t("specialist"),
+              },
+              {
+                value: "stradnieks",
+                text: t("worker"),
+              },
+              {
+                value: "zemnieks",
+                text: t("farmer"),
+              },
+              {
+                value: "uznemejs",
+                text: t("businessman"),
+              },
+              {
+                value: "students",
+                text: t("student"),
+              },
+              {
+                value: "majsaimniece",
+                text: t("housewife"),
+              },
+              {
+                value: "bezdarbnieks",
+                text: t("unemployed"),
+              },
+            ],
+            showOtherItem: true,
+            otherPlaceholder: {
+              default: "",
+            },
+            otherText: {
+              default: t("other"),
+            },
+          },
+          {
+            name: "roka",
+            title: t("hand"),
+            type: "radiogroup",
+            isRequired: true,
+            choices: [
+              {
+                value: "right_handed",
+                text: t("right-handed"),
+              },
+              {
+                value: "left_handed",
+                text: t("left-handed"),
+              },
+            ],
+          },
+          {
+            type: "checkbox",
+            name: "hobiji",
+            title: t("hobbies"),
+            description: t("multiple-choice"),
+            isRequired: true,
+            choices: [
+              {
+                value: "speles",
+                text: t("video-games"),
+              },
+              {
+                value: "ara_aktivitates",
+                text: t("outside-activities"),
+              },
+              {
+                value: "sports",
+                text: t("sport"),
+              },
+              {
+                value: "galda_speles",
+                text: t("board-games"),
+              },
+              {
+                value: "dejosana",
+                text: t("dancing"),
+              },
+              {
+                value: "muzicesana",
+                text: t("music"),
+              },
+              {
+                value: "vizuala_maksla",
+                text: t("visual-arts"),
+              },
+            ],
+            showOtherItem: true,
+            otherPlaceholder: {
+              default: "",
+            },
+            otherText: {
+              default: t("other"),
+            },
+          },
+          {
+            visibleIf: "{hobiji} contains 'speles'",
+            type: "radiogroup",
+            name: "speles",
+            title: t("computer-games"),
+            isRequired: true,
+            choices: [
+              {
+                value: "katru_dienu",
+                text: t("every-day"),
+              },
+              {
+                value: "dazas_reizes_nedela",
+                text: t("few-times-week"),
+              },
+              {
+                value: "dazas_reizes_menesi",
+                text: t("few-times-month"),
+              },
+            ],
+            showOtherItem: true,
+            otherPlaceholder: {
+              default: "",
+            },
+            otherText: {
+              default: t("other"),
+            },
+          },
+
+          {
+            visibleIf: "{hobiji} contains 'speles'",
+            type: "checkbox",
+            name: "speles_veidi",
+            title: t("game-type"),
+            isRequired: true,
+            choices: [
+              {
+                value: "sausana",
+                text: t("shooting"),
+              },
+              {
+                value: "simulatori",
+                text: t("simulators"),
+              },
+              {
+                value: "strategijas",
+                text: t("strategy"),
+              },
+              {
+                value: "piedzivojumi",
+                text: t("adventures"),
+              },
+              {
+                value: "muzikas",
+                text: t("rythm"),
+              },
+              {
+                value: "lomu",
+                text: t("roleplay"),
+              },
+              {
+                value: "logiskas",
+                text: t("logic"),
+              },
+              {
+                value: "galda",
+                text: t("video-board-games"),
+              },
+              {
+                value: "teksta",
+                text: t("text-games"),
+              },
+            ],
+            showOtherItem: true,
+            otherPlaceholder: {
+              default: "",
+            },
+            otherText: {
+              default: t("other"),
+            },
+          },
+        ],
+      },
+    ],
+    completeText: t("next"),
+    showQuestionNumbers: "off",
+    showPrevButton: false,
+    firstPageIsStarted: true,
+    startSurveyText: "Sākt aptauju",
+  };
+
   const survey = new Model(surveyJson);
   survey.onComplete.add((sender, options) => {
     sender.showCompletedPage = false;

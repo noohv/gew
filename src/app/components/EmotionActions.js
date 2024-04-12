@@ -1,6 +1,7 @@
 import React from "react";
 import OtherEmotions from "./OtherEmotions";
 import Rate from "./Rate";
+import { useTranslations } from "next-intl";
 
 export default function EmotionActions({
   rating,
@@ -12,6 +13,7 @@ export default function EmotionActions({
   setCurrentItem,
   resetData,
 }) {
+  const t = useTranslations("Index");
   /**
    * Function to handle click event.
    * If "other" category is selected, adds emotion to it. Otherwise, adds emotion to selectedItems.
@@ -111,13 +113,13 @@ export default function EmotionActions({
                     className="btn delete select-none"
                     onClick={handleDeselect}
                   >
-                    Noņemt
+                    {t("delete")}
                   </button>
                   <button
                     className="btn add select-none"
                     onClick={handleRatingSave}
                   >
-                    Rediģēt
+                    {t("edit")}
                   </button>
                 </>
               ) : (
@@ -127,7 +129,7 @@ export default function EmotionActions({
                     disabled={!rating}
                     onClick={handleRatingSave}
                   >
-                    Pievienot
+                    {t("add")}
                   </button>
                 </>
               )}

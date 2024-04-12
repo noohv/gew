@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import Participant from "./pages/Participant";
-import EmotionWheelPage from "./pages/EmotionWheelPage";
-import FinalPage from "./pages/FinalPage";
-import SurveyPage from "./pages/SurveyPage";
-import "./styles.css";
+import Participant from "../pages/Participant";
+import EmotionWheelPage from "../pages/EmotionWheelPage";
+import FinalPage from "../pages/FinalPage";
+import SurveyPage from "../pages/SurveyPage";
+import "../styles.css";
 
 export default function Home() {
   const [page, setPage] = useState(0);

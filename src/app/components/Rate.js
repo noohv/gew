@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 
 /**
  * Rating component.
@@ -8,6 +9,8 @@ import React from "react";
  * @returns {React.JSX.Element} - JSX component.
  */
 export default function Rate({ numOptions = 5, rating, handleChange }) {
+  const t = useTranslations("Index");
+
   const options = Array.from({ length: numOptions }, (_, index) => (
     <button
       key={index}
@@ -25,12 +28,12 @@ export default function Rate({ numOptions = 5, rating, handleChange }) {
   return (
     <div className="rating-section">
       <div className="input-name">
-        <p>Emocijas intensitāte</p>
+        <p>{t("emotion-intensity")}</p>
       </div>
       <div className="rating-bar-container">{options}</div>
       <div className="rating-intensity">
-        <p>Vāja</p>
-        <p>Stipra</p>
+        <p>{t("low")}</p>
+        <p>{t("high")}</p>
       </div>
     </div>
   );

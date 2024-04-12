@@ -1,8 +1,12 @@
+import { useTranslations } from "next-intl";
+
 export default function Participant({
   setPage,
   participantId,
   setParticipantId,
 }) {
+  const t = useTranslations("Index");
+
   /**
    * Function to handle key events. Invokes handleInput when Enter key is pressed.
    * @param {Object} e - The key event object.
@@ -46,14 +50,11 @@ export default function Participant({
     <div className="main">
       <div className="participant-container">
         <p>
-          Labdien! <br />
+          {t("hello")} <br />
           <br />
-          Esmu Latvijas Universitātes Datorzinātņu 4. kursa students Valters
-          Hūns un bakalaura darba ietvaros veicu pētījumu par vizuālo uzmanību
-          un cilvēka reakcijas laiku. Dalība kopumā aizņems aptuveni 5-10
-          minūtes. <br />
+          {t("introduction")} <br />
           <br />
-          Ievadiet savu identifikatoru
+          {t("input-identifier")}
         </p>
         <input
           className="text-input"
@@ -65,7 +66,7 @@ export default function Participant({
           onChange={(e) => setParticipantId(e.target.value)}
         />
         <button className="btn select-none" onClick={handleInput}>
-          Tālāk
+          {t("next")}
         </button>
       </div>
     </div>

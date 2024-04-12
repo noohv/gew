@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Rate from "./Rate";
 import OtherEmotionList from "./OtherEmotionList";
+import { useTranslations } from "next-intl";
 
 export default function OtherEmotions({
   selectedItems,
@@ -12,6 +13,7 @@ export default function OtherEmotions({
   setRating,
   handleChange,
 }) {
+  const t = useTranslations("Index");
   const [editMode, setEditMode] = useState(false);
   const [editIndex, setEditIndex] = useState();
   const otherEmotions = selectedItems.find(
@@ -121,7 +123,7 @@ export default function OtherEmotions({
         {showInputs ? (
           <>
             <div className="input-name">
-              <p>Emocijas nosaukums</p>
+              <p>{t("emotion-name")}</p>
             </div>
             <input
               className="text-input"
@@ -138,7 +140,7 @@ export default function OtherEmotions({
             <div className="rate-buttons">
               {otherEmotions && (
                 <button className="btn cancel" onClick={handleEditCancel}>
-                  Atcelt
+                  {t("cancel")}
                 </button>
               )}
               <button
@@ -146,14 +148,14 @@ export default function OtherEmotions({
                 disabled={currentItem?.value && rating ? false : true}
                 onClick={editMode ? handleSaveEdit : handleClick}
               >
-                {editMode ? "Rediģēt" : "Pievienot"}
+                {editMode ? t("edit") : t("add")}
               </button>
             </div>
           </>
         ) : (
           otherEmotions.length < MAX_OTHER_COUNT && (
             <button className="btn" onClick={() => setShowInputs(true)}>
-              Pievienot vēl
+              {t("add-more")}
             </button>
           )
         )}

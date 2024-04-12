@@ -1,10 +1,13 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 
 export default function OtherEmotionList({
   emotions,
   handleDelete,
   handleEdit,
 }) {
+  const t = useTranslations("Index");
+
   const list = emotions.map((emotion, index) => (
     <div key={index} id={index} className="list-item">
       <div className="list-item-text">
@@ -44,7 +47,7 @@ export default function OtherEmotionList({
 
   return (
     <div className="other-container">
-      <p>Citas emocijas:</p>
+      <p>{t("other-emotions")}</p>
       <div className="other-list">{list}</div>
     </div>
   );

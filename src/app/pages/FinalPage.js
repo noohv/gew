@@ -1,12 +1,15 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 
 export default function FinalPage() {
+  const t = useTranslations("Index");
+
   return (
     <div className="main">
       <p>
-        Dati saglabāti! <br />
-        Uz reakcijas testu:
-        <a href="https://rsvp.huuns.id.lv/"> https://rsvp.huuns.id.lv/</a>
+        {t("data-saved")} <br />
+        {t("link-reaction-test")}
+        <a href={t("link")}>{t("link")}</a>
       </p>
     </div>
   );
